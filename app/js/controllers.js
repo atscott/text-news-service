@@ -2,10 +2,16 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', []).
-  controller('MyCtrl1', [function() {
+var controllers = angular.module('myApp.controllers');
 
-  }])
-  .controller('MyCtrl2', [function() {
+controllers.controller('MyCtrl1', [function () {
 
-  }]);
+}]);
+
+controllers.controller('MyCtrl2', [function () {
+
+}]);
+
+controllers.controller('LoginCtrl', [function(){
+
+}]);
