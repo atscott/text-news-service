@@ -37,3 +37,7 @@
     filter:none !important;
     background: white none !important;
 }
+
+.nav, .pagination, .carousel, .pointer, .panel-title a {
+    cursor: pointer;
+}

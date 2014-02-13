@@ -1,0 +1,28 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <td>
+            title
+        </td>
+        <td>
+            url
+        </td>
+        <td>
+            remove
+        </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="feed in subscriptions">
+        <td>
+            {{feed.title}}
+        </td>
+        <td>
+            {{feed.url}}
+        </td>
+        <td>
+            <span ng-click="removeSubscription($index)" class="pointer glyphicon glyphicon-remove"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
