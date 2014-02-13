@@ -1,0 +1,27 @@
+<div class="container" id="settings_container">
+    <div class="input_group">
+        <fieldset>
+            <legend>Email Settings</legend>
+            Email <input type="text" class="form-control" ng-model="email">
+            <br>
+            <div class="input-group-btn">
+                <button class="btn btn-primary" ng-click="updateEmail()">Update</button>
+            </div>
+        </fieldset>
+    </div>
+
+    <br>
+
+    <div class="input_group">
+        <fieldset>
+            <legend>Password Settings</legend>
+            Old Password <input type="password" class="form-control" ng_model="old_pwd">
+            New Password <input type="password" class="form-control" ng_model="new_pwd">
+            Confirm Password <input type="password" class="form-control" ng_model="confirm_pwd">
+            <br>
+            <div class="input-group-btn">
+                <button class="btn btn-primary" class="form-control" ng-click="changePassword()">Update</button>
+            </div>
+        </fieldset>
+    </div>
+</div>
