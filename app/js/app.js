@@ -16,5 +16,6 @@ application.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
   $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'});
   $routeProvider.when('/addFeed', {templateUrl: 'partials/addFeed.html', controller: 'AddFeedCtrl'});
+  $routeProvider.when('/createAccount', {templateUrl: 'partials/createAccount.html', controller: 'CreateAccountCtrl'});
   $routeProvider.otherwise({redirectTo: '/login'});
 }]);

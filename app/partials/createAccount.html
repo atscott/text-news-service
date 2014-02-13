@@ -1,0 +1,13 @@
+<div class="container">
+    <legend class="text-center">Create an Account</legend>
+    <form ng-submit="createAccount" name="accountForm">
+        <div class="top-buffer row">
+            <span>E-mail:</span>
+            <input required ng-model="user.email" type="text" class="form-control">
+        </div>
+        <div class="top-buffer row">
+            <span>Password:</span>
+            <input required ng-model="user.password" type="password" class="form-control">
+        </div>
+    </form>
+</div>
