@@ -41,6 +41,7 @@ controllers.controller('LoginCtrl', ['$scope', '$location', 'Authentication', fu
 controllers.controller('AddFeedCtrl', ['$scope', 'FeedManager', function ($scope, FeedManager) {
   $scope.subscriptions = [];
   $scope.feed = {};
+
   $scope.addFeed = function () {
     FeedManager.addFeed(currentUser.email, $scope.feed.url).then(function (response) {
       $scope.feed.title = response.data.Message;
