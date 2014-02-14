@@ -1,28 +1,40 @@
-<table class="table table-striped">
+  <div class="input-group ">
+    <span class="input-group-addon">Search:</span>
+    <input type="text" class="form-control" placeholder="Title or Url" ng-model="searchText">
+  </div>
+<div class="table-responsive">
+  <table class="table table-striped ">
     <thead>
     <tr>
-        <td>
-            title
-        </td>
-        <td>
-            url
-        </td>
-        <td>
-            remove
-        </td>
+      <td style="width:40%">
+        Title
+      </td>
+      <td style="width:60%">
+        Url
+      </td>
+      <td style="width:1px">
+        Keywords
+      </td>
+      <td style="width:1px">
+        Remove
+      </td>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="feed in subscriptions">
-        <td>
-            {{feed.title}}
-        </td>
-        <td>
-            {{feed.url}}
-        </td>
-        <td>
-            <span ng-click="removeSubscription($index)" class="pointer glyphicon glyphicon-remove"></span>
-        </td>
+    <tr ng-repeat="feed in subscriptions | filter:searchText">
+      <td>
+        {{feed.title}}
+      </td>
+      <td>
+        {{feed.url}}
+      </td>
+      <td class="text-center">
+        <span ng-click="" class="pointer glyphicon glyphicon-edit"></span>
+      </td>
+      <td class="text-center">
+        <span ng-click="removeSubscription($index)" class="pointer glyphicon glyphicon-remove"></span>
+      </td>
     </tr>
     </tbody>
-</table>
+  </table>
+</div>

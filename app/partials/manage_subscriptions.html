@@ -1,0 +1,14 @@
+<div class="col-lg-4">
+  <h3>Add Subscriptions</h3>
+  <div class="input-group">
+    <input type="text" class="form-control" ng-model="feed.url"/>
+
+    <div class="input-group-btn">
+      <button class="btn btn-primary" ng-click="addFeed()">Add</button>
+    </div>
+  </div>
+</div>
+<div class="col-lg-8">
+  <h3>Current Subscriptions</h3>
+  <subscription-list remove-subscription-callback="removeSubscription" subscriptions="subscriptions"></subscription-list>
+</div>

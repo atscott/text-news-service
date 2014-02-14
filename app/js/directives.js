@@ -10,17 +10,20 @@ directives.directive('appVersion', ['version', function (version) {
 }]);
 
 directives.directive('subscriptionList', function () {
-  function link(scope, element) {
+  function link(scope) {
     scope.removeSubscription = function (itemIndex) {
-      scope.subscriptions.splice(itemIndex, 1);
+      var expressionHandler = scope.removeSubscriptionCallback();
+      expressionHandler(scope.subscriptions[itemIndex].url);
     }
   }
 
   return{
     restrict: 'E',
+    transclude:true,
     link: link,
     scope: {
-      subscriptions: '='
+      subscriptions: '=',
+      removeSubscriptionCallback: '&'
     },
     templateUrl: 'partials/subscriptions_list.html'
   }
