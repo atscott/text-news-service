@@ -38,14 +38,38 @@ controllers.controller('LoginCtrl', ['$scope', '$location', 'Authentication', fu
   };
 }]);
 
-controllers.controller('AddFeedCtrl', ['$scope', 'FeedManager', function ($scope, FeedManager) {
+controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', function ($scope, FeedManager) {
   $scope.subscriptions = [];
   $scope.feed = {};
 
+  $scope.getUserSubscriptions = function () {
+    FeedManager.GetSubscriptionsForCurrentUser().then(function (response) {
+      if (response.status == 200) {
+        $scope.subscriptions = response.data;
+      } else {
+        alert("Error retrieving subscriptions for current user: " + response.data.Message);
+      }
+    });
+  };
+
+  $scope.getUserSubscriptions();
+
   $scope.addFeed = function () {
-    FeedManager.addFeed(currentUser.email, $scope.feed.url).then(function (response) {
-      $scope.feed.title = response.data.Message;
-      $scope.subscriptions.push($.extend({}, $scope.feed));
+    FeedManager.AddFeedForCurrentUser($scope.feed.url).then(function (response) {
+      if (response.status == 200) {
+        $scope.feed.title = response.data.title;
+      } else {
+        alert("Could not add subscription for current user: " + response.data.Message);
+      }
+    });
+  };
+
+  $scope.removeSubscription = function(feedUrl)
+  {
+    FeedManager.RemoveSubscriptionForCurrentUser(feedUrl).then(function(response){
+      if(response.status != 200){
+        alert("Error removing subscription " + response.data.Message);
+      }
     });
   }
 }]);

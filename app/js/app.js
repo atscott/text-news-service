@@ -15,7 +15,7 @@ application.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
   $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
   $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'});
-  $routeProvider.when('/addFeed', {templateUrl: 'partials/addFeed.html', controller: 'AddFeedCtrl'});
+  $routeProvider.when('/manageSubscriptions', {templateUrl: 'partials/manage_subscriptions.html', controller: 'ManageSubscriptionsCtrl'});
   $routeProvider.when('/settings', {templateUrl: 'partials/settings.html', controller: 'SettingsCtrl'});
   $routeProvider.otherwise({redirectTo: '/login'});
 }]);
