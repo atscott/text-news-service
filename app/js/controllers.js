@@ -74,3 +74,12 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', func
     });
   }
 }]);
+
+controllers.controller('CreateAccountCtrl', ['$scope', function ($scope) {
+    $scope.smsReciever = '';
+
+    $scope.smsSelected = function(smsType) {
+        return $scope.smsReciever == smsType;
+    };
+
+}]);

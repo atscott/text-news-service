@@ -33,6 +33,10 @@
     margin-top:10px;
 }
 
+.left-buffer {
+    margin-left: 10px
+}
+
 .well-white{
     filter:none !important;
     background: white none !important;
@@ -40,4 +44,9 @@
 
 .nav, .pagination, .carousel, .pointer, .panel-title a {
     cursor: pointer;
+}
+
+.error {
+    padding-left: 10px;
+    color: red;
 }
