@@ -3,21 +3,32 @@
         <fieldset>
             <legend>Create Account</legend>
             <form name="newAccountForm">
-                Email<input type="text" class="form-control" name="email" required ng-blur="emailBlurred=true"
-                            ng-model="email">
+                <div class="top-buffer">Email</div>
+                <input type="text" class="form-control" name="email" required ng-blur="emailBlurred=true"
+                       ng-model="email">
 
-                <div class="error" ng-show="newAccountForm.email.$error.required && emailBlurred">
+                <div class="error" ng-show="newAccountForm.email.$error.required && (emailBlurred || submitClicked)">
                     A valid email is required to create an account.
                 </div>
 
-                Password <input type="password" class="form-control" name="password " ng-minlength="6"
-                                ng-blur="passwordBlurred=true" ng-model="password">
+                <div class="top-buffer">Password</div>
+                <input type="password" class="form-control" name="password" required ng-minlength="6"
+                       ng-blur="passwordBlurred=true" ng-model="password">
 
-                <div class="error" ng-show="newAccountForm.password.$error.minlength && passwordBlurred">
+                <div class="error"
+                     ng-show="(newAccountForm.password.$error.minlength || newAccountForm.password.$error.required) &&
+                              (passwordBlurred || submitClicked)">
                     You're password must be at least 6 characters.
                 </div>
 
-                Confirm Password <input required type="password" class="form-control" ng-model="confirmPassword">
+                <div class="top-buffer">Confirm Password</div>
+                <input type="password" class="form-control" name="confirmPassword"
+                       ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()" ng-model="confirmPassword">
+
+                <div class="error"
+                     ng-show="password && !passwordsMatch">
+                    Passwords must match.
+                </div>
                 <br>
 
                 <h4>Select how you would like to receive news updates.</h4>
@@ -39,7 +50,7 @@
                            placeholder="@twitterhandle">
                     <br>
                 </div>
-                <button class="btn btn-primary" ng-click="createAccount()">Create Account</button>
+                <button class="btn btn-primary" ng-click="submitClicked=true; createAccount()">Create Account</button>
             </form>
         </fieldset>
     </div>

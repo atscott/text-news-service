@@ -76,10 +76,16 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', func
 }]);
 
 controllers.controller('CreateAccountCtrl', ['$scope', function ($scope) {
-    $scope.smsReciever = '';
+    $scope.password = '';
+    $scope.confirmPassword = '';
+    $scope.passwordsMatch = false;
 
     $scope.smsSelected = function(smsType) {
         return $scope.smsReciever == smsType;
     };
+
+    $scope.checkPasswords = function() {
+        $scope.passwordsMatch = ($scope.password == $scope.confirmPassword);
+    }
 
 }]);
