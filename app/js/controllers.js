@@ -46,8 +46,9 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', func
     FeedManager.GetSubscriptionsForCurrentUser().then(function (response) {
       if (response.status == 200) {
         $scope.subscriptions = response.data;
+        $scope.getError = null;
       } else {
-        alert("Error retrieving subscriptions for current user: " + response.data.Message);
+        $scope.getError = {Message: "Error retrieving subscriptions: " + response.data.Message}
       }
     });
   };
@@ -58,20 +59,26 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', func
     FeedManager.AddFeedForCurrentUser($scope.feed.url).then(function (response) {
       if (response.status == 200) {
         $scope.feed.title = response.data.title;
-        $scope.feed.url="";
+        $scope.feed.url = "";
+        $scope.addError = null;
       } else {
-        alert("Could not add subscription for current user: " + response.data.Message);
+        $scope.addError = {Message: "Could not add subscription: " + response.data.Message};
       }
     });
   };
 
-  $scope.removeSubscription = function(feedUrl)
-  {
-    FeedManager.RemoveSubscriptionForCurrentUser(feedUrl).then(function(response){
-      if(response.status != 200){
-        alert("Error removing subscription " + response.data.Message);
+  $scope.removeSubscription = function (feedUrl) {
+    FeedManager.RemoveSubscriptionForCurrentUser(feedUrl).then(function (response) {
+      if (response.status != 200) {
+        $scope.removeError = {Message: "Error removing subscription " + response.data.Message};
+      } else {
+        $scope.clearRemoveError();
       }
     });
+  };
+
+  $scope.clearRemoveError = function () {
+    $scope.removeError = null;
   }
 }]);
 
@@ -79,10 +86,6 @@ controllers.controller('CreateAccountCtrl', ['$scope', function ($scope) {
     $scope.password = '';
     $scope.confirmPassword = '';
     $scope.passwordsMatch = false;
-
-    $scope.smsSelected = function(smsType) {
-        return $scope.smsReciever == smsType;
-    };
 
     $scope.checkPasswords = function() {
         $scope.passwordsMatch = ($scope.password == $scope.confirmPassword);
