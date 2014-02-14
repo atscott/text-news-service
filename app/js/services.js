@@ -2,10 +2,23 @@
 
 /* Services */
 
-var user1 = {username: 'Andrew', password: 'Scott', email: 'atscot01@gmail.com', subscriptions: []};
-var user2 = {username: 'user', password: 'user', email: 'scottat@msoe.edu', subscriptions: []};
-var users = [user1, user2];
-var currentUser = user1;
+var users = [
+  {username: 'Andrew', password: 'Scott', email: 'atscot01@gmail.com', subscriptions: []},
+  {username: 'user', password: 'user', email: 'scottat@msoe.edu', subscriptions: []}
+];
+var currentUser;
+
+window.onbeforeunload = function(){
+  $.cookie('users', JSON.stringify(users));
+};
+
+$(function(){
+  var usersCookie = $.cookie('users');
+  if(usersCookie){
+    users = JSON.parse(usersCookie);
+    currentUser = users[0];
+  }
+});
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
@@ -70,10 +83,11 @@ services.factory('FeedManager', ['$q', function ($q) {
         if (this.url == feedUrl) {
           currentUser.subscriptions.splice(index, 1);
           deferred.resolve({data:{Message:"success"},status:200})
+          return false;
         }
       });
 
-      return deferred.promise();
+      return deferred.promise;
     }
   }
 }]);
