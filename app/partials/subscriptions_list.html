@@ -1,3 +1,7 @@
+  <div class="input-group ">
+    <span class="input-group-addon">Search:</span>
+    <input type="text" class="form-control" placeholder="Title or Url" ng-model="searchText">
+  </div>
 <div class="table-responsive">
   <table class="table table-striped ">
     <thead>
@@ -8,7 +12,7 @@
       <td style="width:60%">
         Url
       </td>
-      <td style="width:1px" >
+      <td style="width:1px">
         Keywords
       </td>
       <td style="width:1px">
@@ -17,14 +21,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="feed in subscriptions">
+    <tr ng-repeat="feed in subscriptions | filter:searchText">
       <td>
         {{feed.title}}
       </td>
       <td>
         {{feed.url}}
       </td>
-      <td class="text-center" >
+      <td class="text-center">
         <span ng-click="" class="pointer glyphicon glyphicon-edit"></span>
       </td>
       <td class="text-center">

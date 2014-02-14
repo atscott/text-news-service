@@ -58,6 +58,7 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', func
     FeedManager.AddFeedForCurrentUser($scope.feed.url).then(function (response) {
       if (response.status == 200) {
         $scope.feed.title = response.data.title;
+        $scope.feed.url="";
       } else {
         alert("Could not add subscription for current user: " + response.data.Message);
       }
