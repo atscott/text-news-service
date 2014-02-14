@@ -83,6 +83,7 @@ services.factory('FeedManager', ['$q', function ($q) {
         if (this.url == feedUrl) {
           currentUser.subscriptions.splice(index, 1);
           deferred.resolve({data:{Message:"success"},status:200})
+          return false;
         }
       });
 

@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="feed in subscriptions | filter:searchText">
+    <tr ng-repeat="feed in subscriptions | filter:searchText track by feed.url">
       <td>
         {{feed.title}}
       </td>
@@ -32,7 +32,7 @@
         <span ng-click="" class="pointer glyphicon glyphicon-edit"></span>
       </td>
       <td class="text-center">
-        <span ng-click="removeSubscription($index)" class="pointer glyphicon glyphicon-remove"></span>
+        <span ng-click="removeSubscription(feed.url)" class="pointer glyphicon glyphicon-remove"></span>
       </td>
     </tr>
     </tbody>
