@@ -8,13 +8,13 @@ var users = [
 ];
 var currentUser;
 
-window.onbeforeunload = function(){
+window.onbeforeunload = function () {
   $.cookie('users', JSON.stringify(users));
 };
 
-$(function(){
+$(function () {
   var usersCookie = $.cookie('users');
-  if(usersCookie){
+  if (usersCookie) {
     users = JSON.parse(usersCookie);
     currentUser = users[0];
   }
@@ -62,7 +62,7 @@ services.factory('FeedManager', ['$q', function ($q) {
         var feed = new google.feeds.Feed(feedUrl);
         feed.load(function (result) {
           if (!result.error) {
-            var newSubscription = {url: feedUrl, title: result.feed.title, keywords: []};
+            var newSubscription = {url: feedUrl, title: result.feed.title, keyphrases: []};
             currentUser.subscriptions.push(newSubscription);
             deferred.resolve({data: newSubscription, status: 200});
           } else {
@@ -82,11 +82,41 @@ services.factory('FeedManager', ['$q', function ($q) {
       $.each(currentUser.subscriptions, function (index) {
         if (this.url == feedUrl) {
           currentUser.subscriptions.splice(index, 1);
-          deferred.resolve({data:{Message:"success"},status:200})
+          deferred.resolve({data: {Message: "success"}, status: 200});
           return false;
         }
       });
 
+      return deferred.promise;
+    }
+  }
+}]);
+
+services.factory('KeyphraseManager', ['$q', function ($q) {
+  var subscriptionBeingEdited = null;
+  return{
+    setSubscriptionBeingEdited: function (subscription) {
+      subscriptionBeingEdited = subscription;
+    },
+    getSubscriptionBeingEdited: function () {
+      return subscriptionBeingEdited;
+    },
+    addKeyphrase: function (keyphrase) {
+      var deferred = $q.defer();
+      subscriptionBeingEdited.keyphrases.push(keyphrase);
+      deferred.resolve({data: {Message: 'success'}, status: 200});
+      return deferred.promise;
+    },
+    removeKeyphrase: function (keyphrase) {
+      var deferred = $q.defer();
+      subscriptionBeingEdited.keyphrases.splice(subscriptionBeingEdited.keyphrases.indexOf(keyphrase), 1);
+      deferred.resolve({data: {Message: 'success'}, status: 200});
+      return deferred.promise;
+    },
+    editKeyphrase: function(newKeyphrase, oldKeyphrase){
+      var deferred = $q.defer();
+      subscriptionBeingEdited.keyphrases.splice(subscriptionBeingEdited.keyphrases.indexOf(oldKeyphrase), 1, newKeyphrase);
+      deferred.resolve({data: {Message: 'success'}, status: 200});
       return deferred.promise;
     }
   }

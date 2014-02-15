@@ -1,0 +1,34 @@
+  <div class="input-group ">
+    <span class="input-group-addon">Search:</span>
+    <input type="text" class="form-control" placeholder="Query" ng-model="searchText">
+  </div>
+<div class="table-responsive">
+  <table class="table table-striped ">
+    <thead>
+    <tr>
+      <td>
+        Phrase
+      </td>
+      <td style="width:1px">
+        Edit
+      </td>
+      <td style="width:1px">
+        Remove
+      </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="keyphrase in keyphrases | filter:searchText track by $index">
+      <td>
+        {{keyphrase.phrase}}
+      </td>
+      <td class="text-center">
+        <span ng-click="editKeyphrase(keyphrase)" class="pointer glyphicon glyphicon-edit"></span>
+      </td>
+      <td class="text-center">
+        <span ng-click="removeKeyphrase(keyphrase)" class="pointer glyphicon glyphicon-remove"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

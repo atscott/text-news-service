@@ -12,7 +12,8 @@
 </div>
 <div class="col-lg-8">
     <h3>Current Subscriptions</h3>
-      <alert ng-show="removeError" class="alert-danger alert-dismissable" type="danger" close="clearRemoevError()">{{removeError.Message}}
+      <alert ng-show="removeError" class="alert-danger alert-dismissable" type="danger" close="clearRemoveError()">{{removeError.Message}}
         </alert>
-    <subscription-list remove-subscription-callback="removeSubscription" subscriptions="subscriptions"></subscription-list>
+    <subscription-list edit-keyphrases-callback="editKeyphrasesForFeed" remove-subscription-callback="removeSubscription"
+                        subscriptions="subscriptions"></subscription-list>
 </div>

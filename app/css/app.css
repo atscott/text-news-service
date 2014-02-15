@@ -37,6 +37,10 @@
     margin-left: 10px
 }
 
+.right-buffer {
+    margin-right: 10px
+}
+
 .well-white{
     filter:none !important;
     background: white none !important;
