@@ -147,3 +147,21 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'k
     });
   }
 }]);
+
+controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
+    function ($scope, FeedManager) {
+        $scope.popularFeeds = [];
+
+        $scope.getPopularFeeds = function () {
+            FeedManager.GetPopularFeeds().then(function (response) {
+                if (response.status == 200) {
+                    $scope.popularFeeds = response.data;
+                    $scope.getError = null;
+                } else {
+                    $scope.getError = {Message: "Error retrieving popular feeds: " + response.data.Message};
+                }
+            });
+        };
+
+        $scope.getPopularFeeds();
+}]);

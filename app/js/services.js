@@ -8,6 +8,12 @@ var users = [
 ];
 var currentUser;
 
+var popularFeeds = [
+    {title: 'NFL Headlines', url: 'http://sports.espn.go.com/espn/rss/nfl/news'},
+    {title: 'Engadget', url: 'http://www.engadget.com/rss-hd.xml'},
+    {title: 'TechCrunch', url: 'http://feeds.feedburner.com/TechCrunch/'}
+];
+
 window.onbeforeunload = function () {
   $.cookie('users', JSON.stringify(users));
 };
@@ -88,6 +94,11 @@ services.factory('FeedManager', ['$q', function ($q) {
       });
 
       return deferred.promise;
+    },
+    GetPopularFeeds: function () {
+        var deferred = $q.defer();
+        deferred.resolve({data: popularFeeds, status: 200});
+        return deferred.promise;
     }
   }
 }]);

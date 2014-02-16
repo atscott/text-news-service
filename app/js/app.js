@@ -32,6 +32,7 @@ application.config(['$routeProvider', function ($routeProvider) {
       }
 
     });
+  $routeProvider.when('/popularFeeds', {templateUrl: 'partials/popular_feeds.html', controller: 'PopularFeedsCtrl'});
   $routeProvider.when('/settings', {templateUrl: 'partials/settings.html', controller: 'SettingsCtrl'});
   $routeProvider.when('/createAccount', {templateUrl: 'partials/createAccount.html', controller: 'CreateAccountCtrl'});
   $routeProvider.otherwise({redirectTo: '/login'});
