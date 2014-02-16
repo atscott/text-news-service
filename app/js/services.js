@@ -7,12 +7,6 @@ var users = [
   {username: 'user', password: 'user', email: 'scottat@msoe.edu', subscriptions: []}
 ];
 var currentUser;
-//
-//var popularFeeds = [
-//  {title: 'NFL Headlines', url: 'http://sports.espn.go.com/espn/rss/nfl/news'},
-//  {title: 'Engadget', url: 'http://www.engadget.com/rss-hd.xml'},
-//  {title: 'TechCrunch', url: 'http://feeds.feedburner.com/TechCrunch/'}
-//];
 
 window.onbeforeunload = function () {
   $.cookie('users', JSON.stringify(users));
@@ -26,11 +20,7 @@ $(function () {
   }
 });
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
 var services = angular.module('myApp.services', []);
-services.value('version', '0.1');
-
 
 services.factory('Authentication', ['$q', function ($q) {
   return{

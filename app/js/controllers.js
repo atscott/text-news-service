@@ -164,11 +164,5 @@ controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
       });
     };
 
-    $scope.rawProperty = function (key) {
-      return function (item) {
-        return item[key];
-      };
-    };
-
     $scope.getPopularFeeds();
   }]);
