@@ -7,12 +7,12 @@ var users = [
   {username: 'user', password: 'user', email: 'scottat@msoe.edu', subscriptions: []}
 ];
 var currentUser;
-
-var popularFeeds = [
-    {title: 'NFL Headlines', url: 'http://sports.espn.go.com/espn/rss/nfl/news'},
-    {title: 'Engadget', url: 'http://www.engadget.com/rss-hd.xml'},
-    {title: 'TechCrunch', url: 'http://feeds.feedburner.com/TechCrunch/'}
-];
+//
+//var popularFeeds = [
+//  {title: 'NFL Headlines', url: 'http://sports.espn.go.com/espn/rss/nfl/news'},
+//  {title: 'Engadget', url: 'http://www.engadget.com/rss-hd.xml'},
+//  {title: 'TechCrunch', url: 'http://feeds.feedburner.com/TechCrunch/'}
+//];
 
 window.onbeforeunload = function () {
   $.cookie('users', JSON.stringify(users));
@@ -96,9 +96,24 @@ services.factory('FeedManager', ['$q', function ($q) {
       return deferred.promise;
     },
     GetPopularFeeds: function () {
-        var deferred = $q.defer();
-        deferred.resolve({data: popularFeeds, status: 200});
-        return deferred.promise;
+      var deferred = $q.defer();
+      var popularFeeds = {};
+      var popularFeedsArray = [];
+      $.each(users, function (index, user) {
+        $.each(user.subscriptions, function (index, subscription) {
+         if(popularFeeds[subscription.url]){
+           popularFeeds[subscription.url].count += 1;
+         }else{
+           popularFeeds[subscription.url] = $.extend({}, subscription);
+           popularFeeds[subscription.url].count = 1;
+         }
+        });
+      });
+      $.each(popularFeeds, function(){
+       popularFeedsArray.push(this);
+      });
+      deferred.resolve({data: popularFeedsArray, status: 200});
+      return deferred.promise;
     }
   }
 }]);
@@ -124,7 +139,7 @@ services.factory('KeyphraseManager', ['$q', function ($q) {
       deferred.resolve({data: {Message: 'success'}, status: 200});
       return deferred.promise;
     },
-    editKeyphrase: function(newKeyphrase, oldKeyphrase){
+    editKeyphrase: function (newKeyphrase, oldKeyphrase) {
       var deferred = $q.defer();
       subscriptionBeingEdited.keyphrases.splice(subscriptionBeingEdited.keyphrases.indexOf(oldKeyphrase), 1, newKeyphrase);
       deferred.resolve({data: {Message: 'success'}, status: 200});
