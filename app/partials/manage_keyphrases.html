@@ -1,0 +1,41 @@
+<div class="col-lg-4">
+  <div ng-hide="keyphraseBeingEdited">
+    <h3>Add Keyphrase</h3>
+
+    <form>
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="keyphrase.phrase"/>
+
+        <div class="input-group-btn">
+          <button class="btn btn-primary" ng-click="addKeyphrase()">Add</button>
+        </div>
+      </div>
+    </form>
+    <div ng-show="addError" class="alert alert-danger">{{addError.Message}}</div>
+  </div>
+  <div ng-show="keyphraseBeingEdited">
+    <h3>Edit Keyphrase</h3>
+
+    <form ng-submit="saveEdit()">
+      <div class="input-group">
+        <input type="text" id="keyphraseEdit" class="form-control" ng-model="copyOfKeyphraseBeingEdited.phrase"/>
+
+        <div class="input-group-btn">
+          <button type="submit" name="submit" class="btn btn-primary right-buffer left-buffer">Save</button>
+        </div>
+        <div class="input-group-btn">
+          <button class="btn btn-warning" ng-click="cancelEdit()">Cancel</button>
+        </div>
+      </div>
+    </form>
+
+    <div ng-show="saveEditError" class="alert alert-danger">{{saveEditError.Message}}</div>
+  </div>
+</div>
+<div class="col-lg-8">
+  <h3>Current Keyphrases</h3>
+  <alert ng-show="removeError" class="alert-danger alert-dismissable" type="danger" close="clearRemoveError()">{{removeError.Message}}
+  </alert>
+  <keyphrase-list remove-keyphrase-callback="removeKeyphrase" edit-keyphrase-callback="editKeyphrase"
+                  keyphrases="keyphrases"></keyphrase-list>
+</div>

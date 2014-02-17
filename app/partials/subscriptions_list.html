@@ -1,0 +1,43 @@
+<div class="input-group ">
+  <span class="input-group-addon">Search:</span>
+  <input type="text" class="form-control" placeholder="Title or Url" ng-model="searchText">
+       <span class="input-group-btn">
+        <button class="btn btn-default" ng-click="searchText = null" type="button">Clear</button>
+      </span>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped ">
+    <thead>
+    <tr>
+      <td style="width:40%">
+        Title
+      </td>
+      <td style="width:60%">
+        Url
+      </td>
+      <td style="width:1px">
+        Keywords
+      </td>
+      <td style="width:1px">
+        Remove
+      </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="feed in subscriptions | filter:searchText track by feed.url">
+      <td>
+        {{feed.title}}
+      </td>
+      <td>
+        {{feed.url}}
+      </td>
+      <td class="text-center">
+        <span ng-click="editKeyphrasesForFeed(feed)" class="pointer glyphicon glyphicon-edit"></span>
+      </td>
+      <td class="text-center">
+        <span ng-click="removeSubscription(feed.url)" class="pointer glyphicon glyphicon-remove"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

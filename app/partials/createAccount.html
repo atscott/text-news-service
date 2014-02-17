@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+        <fieldset>
+            <legend>Create Account</legend>
+            <form name="newAccountForm">
+                <div class="top-buffer">Email</div>
+                <input type="text" class="form-control" name="email" required ng-blur="emailBlurred=true"
+                       ng-model="email">
+
+                <div class="error" ng-show="newAccountForm.email.$error.required && (emailBlurred || submitClicked)">
+                    A valid email is required to create an account.
+                </div>
+
+                <div class="top-buffer">Password</div>
+                <input type="password" class="form-control" name="password" required ng-minlength="6"
+                       ng-blur="passwordBlurred=true" ng-model="password">
+
+                <div class="error"
+                     ng-show="(newAccountForm.password.$error.minlength || newAccountForm.password.$error.required) &&
+                              (passwordBlurred || submitClicked)">
+                    You're password must be at least 6 characters.
+                </div>
+
+                <div class="top-buffer">Confirm Password</div>
+                <input type="password" class="form-control" name="confirmPassword"
+                       ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()" ng-model="confirmPassword">
+
+                <div class="error"
+                     ng-show="password && !passwordsMatch">
+                    Passwords must match.
+                </div>
+                <br>
+
+                <h4>Select how you would like to receive news updates.</h4>
+
+                <div class="left-buffer">
+                    <div class="top-buffer">
+                        <input type="checkbox" ng-model="smsPhone">
+                        Text message<br>
+                    </div>
+
+                    <input type="text" class="form-control top-buffer" ng-show="smsPhone" placeholder="Phone number">
+
+                    <div class="top-buffer">
+                        <input type="checkbox" ng-model="smsTwitter">
+                        Twitter<br>
+                    </div>
+
+                    <input type="text" class="form-control top-buffer" ng-show="smsTwitter"
+                           placeholder="@twitterhandle">
+                    <br>
+                </div>
+                <button class="btn btn-primary" ng-click="submitClicked=true; createAccount()">Create Account</button>
+            </form>
+        </fieldset>
+    </div>
+</div>
