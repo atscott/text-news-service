@@ -72,3 +72,15 @@ directives.directive('keyphraseList', function () {
 
 });
 
+
+directives.directive('focusEdit', function($timeout) {
+  return {
+    link: function(scope, element) {
+      element.bind('click', function() {
+        $timeout(function() {
+          $("#keyphraseEdit").focus();
+        });
+      });
+    }
+  };
+});

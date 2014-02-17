@@ -3,8 +3,8 @@
 /* Services */
 
 var users = [
-  {username: 'Andrew', password: 'Scott', email: 'atscot01@gmail.com', subscriptions: []},
-  {username: 'user', password: 'user', email: 'scottat@msoe.edu', subscriptions: []}
+  { twitterHandle:'', password: 'Scott', email: 'atscott01@gmail.com', subscriptions: []},
+  { twitterHandle:'', password: 'user', email: 'scottat@msoe.edu', subscriptions: []}
 ];
 var currentUser;
 
@@ -24,10 +24,10 @@ var services = angular.module('myApp.services', []);
 
 services.factory('Authentication', ['$q', function ($q) {
   return{
-    login: function (username, password) {
+    login: function (email, password) {
       var deferred = $q.defer();
       $.each(users, function () {
-        if (this.username == username && this.password == password) {
+        if (this.email == email && this.password == password) {
           currentUser = this;
           deferred.resolve({status: 200})
         }

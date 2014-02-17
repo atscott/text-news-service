@@ -4,19 +4,11 @@
 
 var controllers = angular.module('myApp.controllers', []);
 
-controllers.controller('MyCtrl1', [function () {
-
-}]);
-
-controllers.controller('MyCtrl2', [function () {
-
-}]);
-
 controllers.controller('LoginCtrl', ['$scope', '$location', 'Authentication', function ($scope, $location, Authentication) {
   $scope.user = {};
 
   $scope.submit = function () {
-    Authentication.login($scope.user.username, $scope.user.password).then(function (response) {
+    Authentication.login($scope.user.email, $scope.user.password).then(function (response) {
       if (response.status != 200) {
         var message = response.data.Message;
         if (message == null || message.length < 1) {
@@ -24,7 +16,7 @@ controllers.controller('LoginCtrl', ['$scope', '$location', 'Authentication', fu
         }
         $scope.showAlert(message);
       } else {
-        $location.path('/view1');
+        $location.path('/manageSubscriptions');
       }
     });
   };

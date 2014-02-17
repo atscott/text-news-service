@@ -2,28 +2,33 @@
   <div ng-hide="keyphraseBeingEdited">
     <h3>Add Keyphrase</h3>
 
-    <div class="input-group">
-      <input type="text" class="form-control" ng-model="keyphrase.phrase"/>
+    <form>
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="keyphrase.phrase"/>
 
-      <div class="input-group-btn">
-        <button class="btn btn-primary" ng-click="addKeyphrase()">Add</button>
+        <div class="input-group-btn">
+          <button class="btn btn-primary" ng-click="addKeyphrase()">Add</button>
+        </div>
       </div>
-    </div>
+    </form>
     <div ng-show="addError" class="alert alert-danger">{{addError.Message}}</div>
   </div>
   <div ng-show="keyphraseBeingEdited">
-     <h3>Edit Keyphrase</h3>
+    <h3>Edit Keyphrase</h3>
 
-    <div class="input-group">
-      <input type="text" class="form-control" ng-model="copyOfKeyphraseBeingEdited.phrase"/>
+    <form ng-submit="saveEdit()">
+      <div class="input-group">
+        <input type="text" id="keyphraseEdit" class="form-control" ng-model="copyOfKeyphraseBeingEdited.phrase"/>
 
-      <div class="input-group-btn">
-        <button class="btn btn-primary right-buffer left-buffer" ng-click="saveEdit()">Save</button>
+        <div class="input-group-btn">
+          <button type="submit" name="submit" class="btn btn-primary right-buffer left-buffer">Save</button>
+        </div>
+        <div class="input-group-btn">
+          <button class="btn btn-warning" ng-click="cancelEdit()">Cancel</button>
+        </div>
       </div>
-      <div class="input-group-btn">
-        <button class="btn btn-warning" ng-click="cancelEdit()">Cancel</button>
-      </div>
-    </div>
+    </form>
+
     <div ng-show="saveEditError" class="alert alert-danger">{{saveEditError.Message}}</div>
   </div>
 </div>
