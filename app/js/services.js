@@ -3,8 +3,8 @@
 /* Services */
 
 var users = [
-  { twitterHandle:'', password: 'Scott', email: 'atscott01@gmail.com', subscriptions: []},
-  { twitterHandle:'', password: 'user', email: 'scottat@msoe.edu', subscriptions: []}
+  { twitterHandle: '', password: 'Scott', email: 'atscott01@gmail.com', subscriptions: []},
+  { twitterHandle: '', password: 'user', email: 'scottat@msoe.edu', subscriptions: []}
 ];
 var currentUser;
 
@@ -22,18 +22,57 @@ $(function () {
 
 var services = angular.module('myApp.services', []);
 
-services.factory('Authentication', ['$q', function ($q) {
+services.factory('Authentication', ['$http', function ($http) {
   return{
     login: function (email, password) {
-      var deferred = $q.defer();
-      $.each(users, function () {
-        if (this.email == email && this.password == password) {
-          currentUser = this;
-          deferred.resolve({status: 200})
-        }
+      return $http({
+        method: "POST",
+        url: 'http://155.92.64.69/auth/login',
+        crossDomain: true,
+        data: JSON.stringify({email: email, password: password})
+      }).then(function (response) {
+        currentUser = response.data;
+        return response;
+      }, function (responseError) {
+        return responseError;
       });
-      deferred.resolve({data: {Message: 'invalid credentials'}, status: 400});
-      return deferred.promise;
+    },
+    createUser: function (email, password, twitter, phone) {
+      return $http({
+        method: "POST",
+        url: 'http://155.92.64.69/user',
+        crossDomain: true,
+        data: JSON.stringify({email: email, password: password, phoneNumber: phone, twitterHandle: twitter})
+      }).then(function (response) {
+        currentUser = response.data;
+        return response;
+      }, function (responseError) {
+        return responseError;
+      });
+    },
+    updateUser: function (email, password, twitter, phone) {
+      var data = {};
+      if (password) {
+        data.password = password;
+      }
+      if (twitter) {
+        data.twitterHandle = twitter;
+      }
+      if (phone) {
+        data.phoneNumber = phone;
+      }
+
+      return $http({
+        method: "POST",
+        url: 'http://155.92.64.69/user/' + email,
+        crossDomain: true,
+        data: JSON.stringify(data)
+      }).then(function (response) {
+        currentUser = response.data;
+        return response;
+      }, function (responseError) {
+        return responseError;
+      });
     }
   }
 }]);
@@ -91,16 +130,16 @@ services.factory('FeedManager', ['$q', function ($q) {
       var popularFeedsArray = [];
       $.each(users, function (index, user) {
         $.each(user.subscriptions, function (index, subscription) {
-         if(popularFeeds[subscription.url]){
-           popularFeeds[subscription.url].count += 1;
-         }else{
-           popularFeeds[subscription.url] = $.extend({}, subscription);
-           popularFeeds[subscription.url].count = 1;
-         }
+          if (popularFeeds[subscription.url]) {
+            popularFeeds[subscription.url].count += 1;
+          } else {
+            popularFeeds[subscription.url] = $.extend({}, subscription);
+            popularFeeds[subscription.url].count = 1;
+          }
         });
       });
-      $.each(popularFeeds, function(){
-       popularFeedsArray.push(this);
+      $.each(popularFeeds, function () {
+        popularFeedsArray.push(this);
       });
       deferred.resolve({data: popularFeedsArray, status: 200});
       return deferred.promise;

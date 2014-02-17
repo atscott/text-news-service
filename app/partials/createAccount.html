@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="top-buffer">Password</div>
-                <input type="password" class="form-control" name="password" required ng-minlength="6"
+                <input type="password" class="form-control" name="password" ng-change="checkPasswords()" required ng-minlength="6"
                        ng-blur="passwordBlurred=true" ng-model="password">
 
                 <div class="error"
@@ -25,8 +25,7 @@
                 <input type="password" class="form-control" name="confirmPassword"
                        ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()" ng-model="confirmPassword">
 
-                <div class="error"
-                     ng-show="password && !passwordsMatch">
+                <div class="error" ng-show="password && !passwordsMatch">
                     Passwords must match.
                 </div>
                 <br>
@@ -39,14 +38,14 @@
                         Text message<br>
                     </div>
 
-                    <input type="text" class="form-control top-buffer" ng-show="smsPhone" placeholder="Phone number">
+                    <input type="text" ng-model="phoneNumber" class="form-control top-buffer" ng-show="smsPhone" placeholder="Phone number">
 
                     <div class="top-buffer">
                         <input type="checkbox" ng-model="smsTwitter">
                         Twitter<br>
                     </div>
 
-                    <input type="text" class="form-control top-buffer" ng-show="smsTwitter"
+                    <input type="text" ng-model="twitterHandle" class="form-control top-buffer" ng-show="smsTwitter"
                            placeholder="@twitterhandle">
                     <br>
                 </div>

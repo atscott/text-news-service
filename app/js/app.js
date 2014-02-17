@@ -35,3 +35,8 @@ application.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/createAccount', {templateUrl: 'partials/createAccount.html', controller: 'CreateAccountCtrl'});
   $routeProvider.otherwise({redirectTo: '/login'});
 }]);
+
+application.config(['$httpProvider', function($httpProvider) {
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}]);

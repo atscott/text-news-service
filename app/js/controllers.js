@@ -10,7 +10,7 @@ controllers.controller('LoginCtrl', ['$scope', '$location', 'Authentication', fu
   $scope.submit = function () {
     Authentication.login($scope.user.email, $scope.user.password).then(function (response) {
       if (response.status != 200) {
-        var message = response.data.Message;
+        var message = response.data.error;
         if (message == null || message.length < 1) {
           message = "Something went wrong (Error code " + response.status + ")";
         }
@@ -82,13 +82,29 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
 
   }]);
 
-controllers.controller('CreateAccountCtrl', ['$scope', function ($scope) {
+controllers.controller('CreateAccountCtrl', ['$scope', 'Authentication', '$location', function ($scope, Authentication, $location) {
   $scope.password = '';
   $scope.confirmPassword = '';
+  $scope.smsPhone = false;
+  $scope.smsTwitter = false;
   $scope.passwordsMatch = false;
 
   $scope.checkPasswords = function () {
     $scope.passwordsMatch = ($scope.password == $scope.confirmPassword);
+  };
+
+  $scope.createAccount = function () {
+    if ($scope.smsPhone) {
+      var phoneNumber = $scope.phoneNumber;
+    }
+    if ($scope.smsTwitter) {
+      var twitterHandle = $scope.twitterHandle;
+    }
+    Authentication.createUser($scope.email, $scope.password, twitterHandle, phoneNumber).then(function (response) {
+        if (response.status == 200) {
+          $location.path('/manageSubscriptions');
+        }
+      })
   }
 
 }]);
@@ -143,7 +159,7 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'k
 controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
   function ($scope, FeedManager) {
     $scope.popularFeeds = [];
-    $scope.reverse=true;
+    $scope.reverse = true;
 
     $scope.getPopularFeeds = function () {
       FeedManager.GetPopularFeeds().then(function (response) {
