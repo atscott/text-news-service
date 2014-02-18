@@ -38,6 +38,18 @@ services.factory('Authentication', ['$http', function ($http) {
         return responseError;
       });
     },
+    getUser: function (email) {
+      return $http({
+        method: "GET",
+        url: serverBaseUrl + '/user/' + email,
+        crossDomain: true
+      }).then(function (response) {
+        return response;
+      }, function (responseError) {
+        console.log(responseError);
+        return responseError;
+      });
+    },
     createUser: function (email, password, twitter, phone) {
       return $http({
         method: "POST",

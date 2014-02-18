@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0902482-e306-4ca5-8c93-2478e09d4e87" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/app.js" afterPath="$PROJECT_DIR$/app/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers.js" afterPath="$PROJECT_DIR$/app/js/controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/partials/manage_keyphrases.html" afterPath="$PROJECT_DIR$/app/partials/manage_keyphrases.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/services.js" afterPath="$PROJECT_DIR$/app/js/services.js" />
     </list>
     <ignored path="text-news-service.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -78,10 +75,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="services.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="services.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/js/services.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="12" selection-start="4615" selection-end="4615" vertical-scroll-proportion="0.0" vertical-offset="2233" max-vertical-offset="3196">
+            <state line="46" column="0" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.6121113" vertical-offset="408" max-vertical-offset="3400">
               <folding />
             </state>
           </provider>
@@ -114,10 +111,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manage_keyphrases.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="manage_keyphrases.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/partials/manage_keyphrases.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="65" selection-start="937" selection-end="937" vertical-scroll-proportion="0.41880342" vertical-offset="214" max-vertical-offset="799">
+            <state line="27" column="65" selection-start="937" selection-end="937" vertical-scroll-proportion="-9.423077" vertical-offset="214" max-vertical-offset="799">
               <folding />
             </state>
           </provider>
@@ -177,10 +174,10 @@
         <option value="$PROJECT_DIR$/app/partials/manage_subscriptions.html" />
         <option value="$PROJECT_DIR$/app/partials/subscriptions_list.html" />
         <option value="$PROJECT_DIR$/app/partials/keyphrase_list.html" />
-        <option value="$PROJECT_DIR$/app/js/services.js" />
         <option value="$PROJECT_DIR$/app/js/app.js" />
         <option value="$PROJECT_DIR$/app/js/controllers.js" />
         <option value="$PROJECT_DIR$/app/partials/manage_keyphrases.html" />
+        <option value="$PROJECT_DIR$/app/js/services.js" />
       </list>
     </option>
   </component>
@@ -568,12 +565,12 @@
       <updated>1392665823227</updated>
       <workItem from="1392665826646" duration="6415000" />
       <workItem from="1392675819851" duration="11134000" />
-      <workItem from="1392689475229" duration="1132000" />
+      <workItem from="1392689475229" duration="1341000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18681000" />
+    <option name="totallyTimeSpent" value="18890000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="69" y="1" width="1850" height="1078" extended-state="0" />
@@ -794,13 +791,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="12" selection-start="4615" selection-end="4615" vertical-scroll-proportion="0.0" vertical-offset="2233" max-vertical-offset="3196">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="19" selection-start="754" selection-end="754" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="799">
@@ -817,7 +807,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/partials/manage_keyphrases.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="65" selection-start="937" selection-end="937" vertical-scroll-proportion="0.41880342" vertical-offset="214" max-vertical-offset="799">
+        <state line="27" column="65" selection-start="937" selection-end="937" vertical-scroll-proportion="-9.423077" vertical-offset="214" max-vertical-offset="799">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="0" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.6121113" vertical-offset="408" max-vertical-offset="3400">
           <folding />
         </state>
       </provider>
