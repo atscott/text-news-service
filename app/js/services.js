@@ -96,7 +96,7 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
             crossDomain: true,
             data: JSON.stringify(feed)
           }).then(function (response) {
-            currentUser.subscriptions.push(feed);
+            currentUser.subscriptions.push({feed:feed, keyphrases:[]});
             deferred.resolve(response);
           }, function (responseError) {
             console.log(responseError);
@@ -126,24 +126,16 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
       return deferred.promise;
     },
     GetPopularFeeds: function () {
-      var deferred = $q.defer();
-      var popularFeeds = {};
-      var popularFeedsArray = [];
-      $.each(users, function (index, user) {
-        $.each(user.subscriptions, function (index, subscription) {
-          if (popularFeeds[subscription.url]) {
-            popularFeeds[subscription.url].count += 1;
-          } else {
-            popularFeeds[subscription.url] = $.extend({}, subscription);
-            popularFeeds[subscription.url].count = 1;
-          }
-        });
+      return $http({
+        method: "GET",
+        url: serverBaseUrl + '/popular',
+        crossDomain: true
+      }).then(function (response) {
+        return response;
+      }, function (responseError) {
+        console.log(responseError);
+        return responseError;
       });
-      $.each(popularFeeds, function () {
-        popularFeedsArray.push(this);
-      });
-      deferred.resolve({data: popularFeedsArray, status: 200});
-      return deferred.promise;
     }
   }
 }]);
