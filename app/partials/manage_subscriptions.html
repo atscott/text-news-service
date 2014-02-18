@@ -10,7 +10,9 @@
             </div>
         </div>
     </form>
-    <div ng-show="addError" class="alert alert-danger">{{addError.Message}}</div>
+   <alert ng-show="addError" class="alert-danger alert-dismissable" type="danger"
+          close="addError = null">{{addError.Message}}
+        </alert>
 </div>
 <div class="col-lg-8">
     <h3>Current Subscriptions</h3>

@@ -55,7 +55,11 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
           $scope.feed.url = "";
           $scope.addError = null;
         } else {
-          $scope.addError = {Message: "Could not add subscription: " + response.data.Message};
+           var message = response.data.error;
+        if (message == null || message.length < 1) {
+          message = "Error code " + response.status + ")";
+        }
+          $scope.addError = {Message: "Could not add subscription: " + message};
         }
       });
     };
@@ -176,6 +180,9 @@ controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
   }]);
 
 controllers.controller('SettingsCtrl',['$scope', 'Authentication', function($scope, Authentication){
+  $scope.twitterHandle = currentUser.twitterHandle;
+  $scope.phoneNumber = currentUser.phoneNumber;
+
   $scope.changePassword = function(){
     Authentication.updateUser($scope.new_pwd);
   };

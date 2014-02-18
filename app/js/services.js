@@ -32,9 +32,6 @@ services.factory('Authentication', ['$http', function ($http) {
         data: JSON.stringify({email: email, password: password})
       }).then(function (response) {
         currentUser = response.data;
-        if (!currentUser.subscriptions) {
-          currentUser.subscriptions = [];
-        }
         return response;
       }, function (responseError) {
         console.log(responseError);
