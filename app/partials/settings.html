@@ -1,29 +1,32 @@
 <div class="container" id="settings_container">
-    <div class="input_group">
+    <form class="input_group">
         <fieldset>
             <legend>Contact Settings</legend>
             Phone Number <input type="text" class="form-control" ng-model="phoneNumber">
             <br>
-          Twitter Handle <input type="text" class="form-control" ng-model="twitterHandle">
-          <br>
+            Twitter Handle <input type="text" class="form-control" ng-model="twitterHandle">
+            <br>
             <div class="btn">
-                <button class="btn btn-primary" ng-click="updateContactInfo()">Update</button>
+                <input type="submit" value="Update" class="btn btn-primary" ng-click="updateContactInfo()">
             </div>
         </fieldset>
-    </div>
+    </form>
 
     <br>
 
-    <div class="input_group">
+    <form class="input_group">
         <fieldset>
             <legend>Password Settings</legend>
             Old Password <input type="password" class="form-control" ng_model="old_pwd">
+            <br>
             New Password <input type="password" class="form-control" ng_model="new_pwd">
+            <br>
             Confirm Password <input type="password" class="form-control" ng_model="confirm_pwd">
             <br>
             <div class="btn">
                 <button class="btn btn-primary" class="form-control" ng-click="changePassword()">Update</button>
             </div>
         </fieldset>
-    </div>
+    </form>
+
 </div>
