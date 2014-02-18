@@ -174,3 +174,14 @@ controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
 
     $scope.getPopularFeeds();
   }]);
+
+controllers.controller('SettingsCtrl',['$scope', 'Authentication', function($scope, Authentication){
+  $scope.changePassword = function(){
+    Authentication.updateUser($scope.new_pwd);
+  };
+
+  $scope.updateContactInfo = function()
+  {
+    Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber)
+  }
+}]);

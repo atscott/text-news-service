@@ -55,10 +55,10 @@ services.factory('Authentication', ['$http', function ($http) {
         return responseError;
       });
     },
-    updateUser: function (email, password, twitter, phone) {
+    updateUser: function ( password, twitter, phone) {
       return $http({
-        method: "POST",
-        url: serverBaseUrl + '/user/' + email,
+        method: "PUT",
+        url: serverBaseUrl + '/user/' + currentUser.email,
         crossDomain: true,
         data: JSON.stringify({password: password, twitterHandle: twitter, phoneNumber: phone})
       }).then(function (response) {
