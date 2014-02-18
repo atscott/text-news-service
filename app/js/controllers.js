@@ -203,16 +203,23 @@ controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
   }]);
 
 controllers.controller('SettingsCtrl', ['$scope', 'Authentication', function ($scope, Authentication) {
-  $scope.twitterHandle = currentUser.twitterHandle;
-  $scope.phoneNumber = currentUser.phoneNumber;
+    $scope.password = '';
+    $scope.confirmPassword = '';
+    $scope.passwordsMatch = false;
+    $scope.twitterHandle = currentUser.twitterHandle;
+    $scope.phoneNumber = currentUser.phoneNumber;
 
-  $scope.changePassword = function () {
-    Authentication.updateUser($scope.new_pwd);
-  };
+    $scope.checkPasswords = function () {
+        $scope.passwordsMatch = ($scope.password == $scope.confirmPassword);
+    };
 
-  $scope.updateContactInfo = function () {
-    Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber)
-  }
+    $scope.changePassword = function () {
+        Authentication.updateUser($scope.password);
+    };
+
+    $scope.updateContactInfo = function () {
+        Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber)
+    }
 }]);
 
 controllers.controller('NavBarCtrl', ['$scope', '$location', function ($scope, $location) {
