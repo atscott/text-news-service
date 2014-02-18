@@ -114,14 +114,17 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
       return deferred.promise;
     },
     RemoveSubscriptionForCurrentUser: function (feed) {
-      $http({
+      return $http({
         method: "DELETE",
-        url: serverBaseUrl + '/user/' + currentUser.email + '/subscription',
-        crossDomain: true,
-        contentType:'application/json',
-        data: JSON.stringify({feed: feed.link})
+        url: serverBaseUrl + '/user/' + currentUser.email + '/subscription?feed=' + feed.link,
+        crossDomain: true
       }).then(function (response) {
-        currentUser.subscriptions.splice(currentUser.subscriptions.indexOf(feed), 1);
+        $.each(currentUser.subscriptions, function(index){
+          if(this.feed.link == feed.link){
+            currentUser.subscriptions.splice(index,1);
+            return false;
+          }
+        });
         return response;
       }, function (responseError) {
         console.log(responseError);
