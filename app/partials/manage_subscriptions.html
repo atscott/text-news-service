@@ -1,6 +1,5 @@
 <div class="col-lg-4">
-    <h3>Add Subscriptions</h3>
-
+    <legend><h3>Add Subscriptions</h3></legend>
     <form>
         <div class="input-group">
             <input type="text" class="form-control" ng-model="feed.url"/>
@@ -10,12 +9,13 @@
             </div>
         </div>
     </form>
-   <alert ng-show="addError" class="alert-danger alert-dismissable" type="danger"
-          close="addError = null">{{addError.Message}}
-        </alert>
+    <alert ng-show="addError" class="alert-danger alert-dismissable" type="danger"
+        close="addError = null">{{addError.Message}}
+    </alert>
 </div>
+
 <div class="col-lg-8">
-    <h3>Current Subscriptions</h3>
+    <legend><h3>Current Subscriptions</h3></legend>
     <alert ng-show="removeError" class="alert-danger alert-dismissable" type="danger" close="clearRemoveError()">{{removeError.Message}}
     </alert>
     <subscription-list edit-keyphrases-callback="editKeyphrasesForFeed" remove-subscription-callback="removeSubscription"

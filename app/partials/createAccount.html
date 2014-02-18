@@ -1,8 +1,8 @@
 <div class="container">
     <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-        <fieldset>
-            <legend>Create Account</legend>
-            <form name="newAccountForm">
+        <form name="newAccountForm">
+            <fieldset>
+                <legend><h3>Create Account</h3></legend>
                 <div class="top-buffer">Email</div>
                 <input type="text" class="form-control" name="email" required ng-blur="emailBlurred=true"
                        ng-model="email">
@@ -50,7 +50,7 @@
                     <br>
                 </div>
                 <button class="btn btn-primary" ng-click="submitClicked=true; createAccount()">Create Account</button>
-            </form>
-        </fieldset>
+            </fieldset>
+        </form>
     </div>
 </div>
