@@ -64,8 +64,8 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
       });
     };
 
-    $scope.removeSubscription = function (feedUrl) {
-      FeedManager.RemoveSubscriptionForCurrentUser(feedUrl).then(function (response) {
+    $scope.removeSubscription = function (feed) {
+      FeedManager.RemoveSubscriptionForCurrentUser(feed).then(function (response) {
         if (response.status != 200) {
           $scope.removeError = {Message: "Error removing subscription " + response.data.Message};
         } else {

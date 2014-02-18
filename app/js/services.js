@@ -96,7 +96,7 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
             crossDomain: true,
             data: JSON.stringify(feed)
           }).then(function (response) {
-            currentUser.subscriptions.push({feed:feed, keyphrases:[]});
+            currentUser.subscriptions.push({feed: feed, keyphrases: []});
             deferred.resolve(response);
           }, function (responseError) {
             console.log(responseError);
@@ -113,17 +113,20 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
       deferred.resolve({data: currentUser.subscriptions, status: 200});
       return deferred.promise;
     },
-    RemoveSubscriptionForCurrentUser: function (feedUrl) {
-      var deferred = $q.defer();
-      $.each(currentUser.subscriptions, function (index) {
-        if (this.url == feedUrl) {
-          currentUser.subscriptions.splice(index, 1);
-          deferred.resolve({data: {Message: "success"}, status: 200});
-          return false;
-        }
+    RemoveSubscriptionForCurrentUser: function (feed) {
+      $http({
+        method: "DELETE",
+        url: serverBaseUrl + '/user/' + currentUser.email + '/subscription',
+        crossDomain: true,
+        contentType:'application/json',
+        data: JSON.stringify({feed: feed.link})
+      }).then(function (response) {
+        currentUser.subscriptions.splice(currentUser.subscriptions.indexOf(feed), 1);
+        return response;
+      }, function (responseError) {
+        console.log(responseError);
+        return responseError;
       });
-
-      return deferred.promise;
     },
     GetPopularFeeds: function () {
       return $http({
@@ -164,10 +167,17 @@ services.factory('KeyphraseManager', ['$q', '$http', function ($q, $http) {
       });
     },
     removeKeyphrase: function (keyphrase) {
-      var deferred = $q.defer();
-      subscriptionBeingEdited.keyphrases.splice(subscriptionBeingEdited.keyphrases.indexOf(keyphrase), 1);
-      deferred.resolve({data: {Message: 'success'}, status: 200});
-      return deferred.promise;
+      return $http({
+        method: "DELETE",
+        url: serverBaseUrl + '/user/' + currentUser.email + '/subscription/keyphrase/' + keyphrase.id,
+        crossDomain: true
+      }).then(function (response) {
+        subscriptionBeingEdited.keyphrases.splice(subscriptionBeingEdited.keyphrases.indexOf(keyphrase), 1);
+        return response;
+      }, function (responseError) {
+        console.log(responseError);
+        return responseError;
+      });
     },
     editKeyphrase: function (newKeyphrase, oldKeyphrase) {
       return $http({
