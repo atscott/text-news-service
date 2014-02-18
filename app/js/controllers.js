@@ -214,3 +214,23 @@ controllers.controller('SettingsCtrl', ['$scope', 'Authentication', function ($s
     Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber)
   }
 }]);
+
+controllers.controller('NavBarCtrl', ['$scope', '$location', function ($scope, $location) {
+  $scope.showNav = false;
+  $scope.userEmail = '';
+
+  function updateEmail() {
+      $scope.userEmail = ( currentUser ) ? currentUser.email : '';
+  }
+
+  updateEmail();
+
+  $scope.$on('$routeChangeStart', function() {
+    if ( $location.path() == '/login' || $location.path() == '/createAccount' ) {
+      $scope.showNav = false;
+    } else {
+      $scope.showNav = true;
+      updateEmail();
+    }
+  });
+}]);
