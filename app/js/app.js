@@ -19,10 +19,10 @@ application.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'partials/manage_keyphrases.html',
       controller: 'ManageKeyphrasesCtrl',
       resolve: {
-        keyphrases: function (KeyphraseManager, $location) {
+        subscription: function (KeyphraseManager, $location) {
           var subscription = KeyphraseManager.getSubscriptionBeingEdited();
           if(subscription){
-            return subscription.keyphrases;
+            return subscription;
           }else{
             $location.path('/manageSubscriptions')
           }

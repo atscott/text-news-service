@@ -114,8 +114,9 @@ controllers.controller('CreateAccountCtrl', ['$scope', 'Authentication', '$locat
 }]);
 
 
-controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'keyphrases', function ($scope, KeyphraseManager, keyphrases) {
-  $scope.keyphrases = keyphrases;
+controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'subscription', function ($scope, KeyphraseManager, subscription) {
+  $scope.keyphrases = subscription.keyphrases;
+  $scope.feedTitle = subscription.feed.title;
 
   $scope.editKeyphrase = function (keyphrase) {
     $scope.copyOfKeyphraseBeingEdited = $.extend({}, keyphrase);
@@ -143,9 +144,10 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'k
 
   $scope.removeKeyphrase = function (keyphrase) {
     KeyphraseManager.removeKeyphrase(keyphrase).then(function (response) {
-      if (response.status == 200) {
-        if ($scope.keyphraseBeingEdited == keyphrase) {
-          $scope.keyphraseBeingEdited = null;
+        if (response.status == 200) {
+          if ($scope.keyphraseBeingEdited == keyphrase) {
+            $scope.keyphraseBeingEdited = null;
+          }
         } else {
           var message = response.data.error;
           if (message == null || message.length < 1) {
@@ -154,7 +156,8 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'k
           $scope.removeError = {Message: "Could not remove keyphrase: " + message};
         }
       }
-    });
+    )
+    ;
   };
 
   $scope.cancelEdit = function () {
@@ -169,7 +172,8 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'k
       }
     });
   }
-}]);
+}])
+;
 
 controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
   function ($scope, FeedManager) {
