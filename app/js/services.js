@@ -1,7 +1,7 @@
 'use strict';
 
 /* Services */
-var serverBaseUrl = 'http://75.86.148.205';
+var serverBaseUrl = 'http://155.92.75.163';
 
 var users = [
   { twitterHandle: '', password: 'Scott', email: 'atscott01@gmail.com', subscriptions: []},
