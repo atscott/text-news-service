@@ -24,18 +24,18 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="feed in subscriptions | filter:searchText track by feed.url">
+    <tr ng-repeat="feed in subscriptions | filter:searchText track by $index">
       <td>
         {{feed.title}}
       </td>
       <td>
-        {{feed.url}}
+        {{feed.link}}
       </td>
       <td class="text-center">
         <span ng-click="editKeyphrasesForFeed(feed)" class="pointer glyphicon glyphicon-edit"></span>
       </td>
       <td class="text-center">
-        <span ng-click="removeSubscription(feed.url)" class="pointer glyphicon glyphicon-remove"></span>
+        <span ng-click="removeSubscription(feed.link)" class="pointer glyphicon glyphicon-remove"></span>
       </td>
     </tr>
     </tbody>

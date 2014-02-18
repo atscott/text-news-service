@@ -1,6 +1,7 @@
 'use strict';
 
 /* Services */
+var serverBaseUrl = 'http://75.86.148.205';
 
 var users = [
   { twitterHandle: '', password: 'Scott', email: 'atscott01@gmail.com', subscriptions: []},
@@ -9,14 +10,13 @@ var users = [
 var currentUser;
 
 window.onbeforeunload = function () {
-  $.cookie('users', JSON.stringify(users));
+  $.cookie('currentUser', JSON.stringify(currentUser));
 };
 
 $(function () {
-  var usersCookie = $.cookie('users');
-  if (usersCookie) {
-    users = JSON.parse(usersCookie);
-    currentUser = users[0];
+  var userCookie = $.cookie('currentUser');
+  if (userCookie) {
+    currentUser = JSON.parse(userCookie);
   }
 });
 
@@ -27,57 +27,52 @@ services.factory('Authentication', ['$http', function ($http) {
     login: function (email, password) {
       return $http({
         method: "POST",
-        url: 'http://155.92.64.69/auth/login',
+        url: serverBaseUrl + '/auth/login',
         crossDomain: true,
         data: JSON.stringify({email: email, password: password})
       }).then(function (response) {
         currentUser = response.data;
+        if (!currentUser.subscriptions) {
+          currentUser.subscriptions = [];
+        }
         return response;
       }, function (responseError) {
+        console.log(responseError);
         return responseError;
       });
     },
     createUser: function (email, password, twitter, phone) {
       return $http({
         method: "POST",
-        url: 'http://155.92.64.69/user',
+        url: serverBaseUrl + '/user',
         crossDomain: true,
         data: JSON.stringify({email: email, password: password, phoneNumber: phone, twitterHandle: twitter})
       }).then(function (response) {
         currentUser = response.data;
         return response;
       }, function (responseError) {
+        console.log(responseError);
         return responseError;
       });
     },
     updateUser: function (email, password, twitter, phone) {
-      var data = {};
-      if (password) {
-        data.password = password;
-      }
-      if (twitter) {
-        data.twitterHandle = twitter;
-      }
-      if (phone) {
-        data.phoneNumber = phone;
-      }
-
       return $http({
         method: "POST",
-        url: 'http://155.92.64.69/user/' + email,
+        url: serverBaseUrl + '/user/' + email,
         crossDomain: true,
-        data: JSON.stringify(data)
+        data: JSON.stringify({password: password, twitterHandle: twitter, phoneNumber: phone})
       }).then(function (response) {
         currentUser = response.data;
         return response;
       }, function (responseError) {
+        console.log(responseError);
         return responseError;
       });
     }
   }
 }]);
 
-services.factory('FeedManager', ['$q', function ($q) {
+services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
   function currentUserIsSubscribedTo(feedUrl) {
     var alreadySubscribed = false;
     $.each(currentUser.subscriptions, function () {
@@ -91,20 +86,27 @@ services.factory('FeedManager', ['$q', function ($q) {
   return{
     AddFeedForCurrentUser: function (feedUrl) {
       var deferred = $q.defer();
-      if (currentUserIsSubscribedTo(feedUrl)) {
-        deferred.resolve({data: {Message: 'Already subscribed to feed'}, status: 400});
-      } else {
-        var feed = new google.feeds.Feed(feedUrl);
-        feed.load(function (result) {
-          if (!result.error) {
-            var newSubscription = {url: feedUrl, title: result.feed.title, keyphrases: []};
-            currentUser.subscriptions.push(newSubscription);
-            deferred.resolve({data: newSubscription, status: 200});
-          } else {
-            deferred.resolve({data: {Message: 'invalid feed'}, status: 400});
-          }
-        });
-      }
+      var feed = new google.feeds.Feed(feedUrl);
+
+      feed.load(function (result) {
+        var feed = {link: result.feed.feedUrl, title: result.feed.title};
+        if (!result.error) {
+          $http({
+            method: "POST",
+            url: serverBaseUrl + '/user/' + currentUser.email + '/subscription',
+            crossDomain: true,
+            data: JSON.stringify(feed)
+          }).then(function (response) {
+            currentUser.subscriptions.push(feed);
+            deferred.resolve(response);
+          }, function (responseError) {
+            console.log(responseError);
+            deferred.resolve(responseError);
+          });
+        } else {
+          deferred.resolve({data: {Message: 'invalid feed'}, status: 400});
+        }
+      });
       return deferred.promise;
     },
     GetSubscriptionsForCurrentUser: function () {
