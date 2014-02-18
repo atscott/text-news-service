@@ -23,7 +23,7 @@
     <tbody>
     <tr ng-repeat="keyphrase in keyphrases | filter:searchText track by $index">
       <td>
-        {{keyphrase.phrase}}
+        {{keyphrase.keyphrase}}
       </td>
       <td class="text-center">
         <span focus-edit ng-click="editKeyphrase(keyphrase)" class="pointer glyphicon glyphicon-edit"></span>

@@ -55,10 +55,10 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
           $scope.feed.url = "";
           $scope.addError = null;
         } else {
-           var message = response.data.error;
-        if (message == null || message.length < 1) {
-          message = "Error code " + response.status + ")";
-        }
+          var message = response.data.error;
+          if (message == null || message.length < 1) {
+            message = "Error code " + response.status;
+          }
           $scope.addError = {Message: "Could not add subscription: " + message};
         }
       });
@@ -105,10 +105,10 @@ controllers.controller('CreateAccountCtrl', ['$scope', 'Authentication', '$locat
       var twitterHandle = $scope.twitterHandle;
     }
     Authentication.createUser($scope.email, $scope.password, twitterHandle, phoneNumber).then(function (response) {
-        if (response.status == 200) {
-          $location.path('/manageSubscriptions');
-        }
-      })
+      if (response.status == 200) {
+        $location.path('/manageSubscriptions');
+      }
+    })
   }
 
 }]);
@@ -120,7 +120,6 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'k
   $scope.editKeyphrase = function (keyphrase) {
     $scope.copyOfKeyphraseBeingEdited = $.extend({}, keyphrase);
     $scope.keyphraseBeingEdited = keyphrase;
-
   };
 
   $scope.addKeyphrase = function () {
@@ -129,6 +128,12 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'k
         if (response.status == 200) {
           $scope.keyphrase = null;
           $scope.addError = null;
+        } else {
+          var message = response.data.error;
+          if (message == null || message.length < 1) {
+            message = "Error code " + response.status;
+          }
+          $scope.addError = {Message: "Could not add keyphrase: " + message};
         }
       });
     } else {
@@ -141,6 +146,12 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'k
       if (response.status == 200) {
         if ($scope.keyphraseBeingEdited == keyphrase) {
           $scope.keyphraseBeingEdited = null;
+        } else {
+          var message = response.data.error;
+          if (message == null || message.length < 1) {
+            message = "Error code " + response.status;
+          }
+          $scope.removeError = {Message: "Could not remove keyphrase: " + message};
         }
       }
     });
@@ -171,7 +182,11 @@ controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
           $scope.popularFeeds = response.data;
           $scope.getError = null;
         } else {
-          $scope.getError = {Message: "Error retrieving popular feeds: " + response.data.Message};
+          var message = response.data.error;
+          if (message == null || message.length < 1) {
+            message = "Error code " + response.status;
+          }
+          $scope.getError = {Message: "Error retrieving popular feeds: " + message};
         }
       });
     };
@@ -179,16 +194,15 @@ controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
     $scope.getPopularFeeds();
   }]);
 
-controllers.controller('SettingsCtrl',['$scope', 'Authentication', function($scope, Authentication){
+controllers.controller('SettingsCtrl', ['$scope', 'Authentication', function ($scope, Authentication) {
   $scope.twitterHandle = currentUser.twitterHandle;
   $scope.phoneNumber = currentUser.phoneNumber;
 
-  $scope.changePassword = function(){
+  $scope.changePassword = function () {
     Authentication.updateUser($scope.new_pwd);
   };
 
-  $scope.updateContactInfo = function()
-  {
+  $scope.updateContactInfo = function () {
     Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber)
   }
 }]);

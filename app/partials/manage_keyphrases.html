@@ -4,21 +4,23 @@
 
     <form>
       <div class="input-group">
-        <input type="text" class="form-control" ng-model="keyphrase.phrase"/>
+        <input type="text" class="form-control" ng-model="keyphrase.keyphrase"/>
 
         <div class="input-group-btn">
           <button class="btn btn-primary" ng-click="addKeyphrase()">Add</button>
         </div>
       </div>
     </form>
-    <div ng-show="addError" class="alert alert-danger">{{addError.Message}}</div>
+     <alert ng-show="addError" class="alert-danger alert-dismissable" type="danger"
+          close="addError = null">{{addError.Message}}
+        </alert>
   </div>
   <div ng-show="keyphraseBeingEdited">
     <h3>Edit Keyphrase</h3>
 
     <form ng-submit="saveEdit()">
       <div class="input-group">
-        <input type="text" id="keyphraseEdit" class="form-control" ng-model="copyOfKeyphraseBeingEdited.phrase"/>
+        <input type="text" id="keyphraseEdit" class="form-control" ng-model="copyOfKeyphraseBeingEdited.keyphrase"/>
 
         <div class="input-group-btn">
           <button type="submit" name="submit" class="btn btn-primary right-buffer left-buffer">Save</button>

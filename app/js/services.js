@@ -52,7 +52,7 @@ services.factory('Authentication', ['$http', function ($http) {
         return responseError;
       });
     },
-    updateUser: function ( password, twitter, phone) {
+    updateUser: function (password, twitter, phone) {
       return $http({
         method: "PUT",
         url: serverBaseUrl + '/user/' + currentUser.email,
@@ -70,16 +70,6 @@ services.factory('Authentication', ['$http', function ($http) {
 }]);
 
 services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
-  function currentUserIsSubscribedTo(feedUrl) {
-    var alreadySubscribed = false;
-    $.each(currentUser.subscriptions, function () {
-      if (this.url === feedUrl) {
-        alreadySubscribed = true;
-      }
-    });
-    return alreadySubscribed;
-  }
-
   return{
     AddFeedForCurrentUser: function (feedUrl) {
       var deferred = $q.defer();
@@ -146,7 +136,7 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
   }
 }]);
 
-services.factory('KeyphraseManager', ['$q', function ($q) {
+services.factory('KeyphraseManager', ['$q', '$http', function ($q, $http) {
   var subscriptionBeingEdited = null;
   return{
     setSubscriptionBeingEdited: function (subscription) {
@@ -156,10 +146,18 @@ services.factory('KeyphraseManager', ['$q', function ($q) {
       return subscriptionBeingEdited;
     },
     addKeyphrase: function (keyphrase) {
-      var deferred = $q.defer();
-      subscriptionBeingEdited.keyphrases.push(keyphrase);
-      deferred.resolve({data: {Message: 'success'}, status: 200});
-      return deferred.promise;
+      return $http({
+        method: "POST",
+        url: serverBaseUrl + '/user/' + currentUser.email + '/subscription/keyphrase',
+        crossDomain: true,
+        data: JSON.stringify({feed: subscriptionBeingEdited.feed.link, keyphrase: keyphrase.keyphrase})
+      }).then(function (response) {
+        subscriptionBeingEdited.keyphrases.push(response.data);
+        return response;
+      }, function (responseError) {
+        console.log(responseError);
+        return responseError;
+      });
     },
     removeKeyphrase: function (keyphrase) {
       var deferred = $q.defer();
@@ -168,10 +166,18 @@ services.factory('KeyphraseManager', ['$q', function ($q) {
       return deferred.promise;
     },
     editKeyphrase: function (newKeyphrase, oldKeyphrase) {
-      var deferred = $q.defer();
-      subscriptionBeingEdited.keyphrases.splice(subscriptionBeingEdited.keyphrases.indexOf(oldKeyphrase), 1, newKeyphrase);
-      deferred.resolve({data: {Message: 'success'}, status: 200});
-      return deferred.promise;
+      return $http({
+        method: "PUT",
+        url: serverBaseUrl + '/user/' + currentUser.email + '/subscription/keyphrase/' + newKeyphrase.id,
+        crossDomain: true,
+        data: JSON.stringify({keyphrase: newKeyphrase.keyphrase})
+      }).then(function (response) {
+        subscriptionBeingEdited.keyphrases.splice(subscriptionBeingEdited.keyphrases.indexOf(oldKeyphrase), 1, response.data);
+        return response;
+      }, function (responseError) {
+        console.log(responseError);
+        return responseError;
+      });
     }
   }
 }]);
