@@ -70,7 +70,7 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
           if (message == null || message.length < 1) {
             message = "Error code " + response.status;
           }
-          $scope.addError = {Message: "Could not remove subscription: " + message};
+          $scope.removeError = {Message: "Could not remove subscription: " + message};
         } else {
           $scope.clearRemoveError();
           KeyphraseManager.setSubscriptionBeingEdited(null);
