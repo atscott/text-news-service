@@ -30,24 +30,36 @@
                 </div>
                 <br>
 
-                <h4>Select how you would like to receive news updates.</h4>
+                <div class="help-text center-vertical">Select how you would like to receive news updates.</div>
+
+                <div class="help-icon center-vertical" ng-click="setShowHelp(!showHelp)"></div>
+
+                <alert class="alert-dismissable" ng-show="showHelp" type="'info'"
+                       close="setShowHelp(false)">
+                    <li>Text message - receive updates on your mobile device.</li>
+                    <li>Twitter - receive updates via direct messages to your Twitter account</li>
+                </alert>
 
                 <div class="left-buffer">
-                    <div class="top-buffer">
-                        <input type="checkbox" ng-model="smsPhone">
-                        Text message<br>
-                    </div>
+                    <div class="left-buffer">
+                        <div class="checkbox-option top-buffer">
+                            <input type="checkbox" class="center-vertical" ng-model="smsPhone">
 
-                    <input type="text" ng-model="phoneNumber" class="form-control top-buffer" ng-show="smsPhone" placeholder="Phone number">
+                            <div class="center-vertical">Text message</div>
+                        </div>
 
-                    <div class="top-buffer">
-                        <input type="checkbox" ng-model="smsTwitter">
-                        Twitter<br>
-                    </div>
+                        <input type="text" ng-model="phoneNumber" class="form-control top-buffer" ng-show="smsPhone"
+                               placeholder="Phone number">
 
-                    <input type="text" ng-model="twitterHandle" class="form-control top-buffer" ng-show="smsTwitter"
-                           placeholder="@twitterhandle">
-                    <br>
+                        <div class="checkbox-option top-buffer">
+                            <input type="checkbox" class="center-vertical" ng-model="smsTwitter">
+
+                            <div class="twitter center-vertical"></div>
+                        </div>
+
+                        <input type="text" ng-model="twitterHandle" class="form-control top-buffer" ng-show="smsTwitter"
+                               placeholder="@twitterhandle">
+                        <br>
                 </div>
                 <button class="btn btn-primary" ng-click="submitClicked=true; createAccount()">Create Account</button>
             </form>

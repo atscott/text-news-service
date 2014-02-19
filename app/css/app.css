@@ -54,3 +54,36 @@
     padding-left: 10px;
     color: red;
 }
+
+.help-text {
+    font-size: 16px;
+}
+
+.twitter {
+    background-image: url('../img/twitter.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 20px;
+    width: 105px;
+    display: inline-block;
+    margin-left: 2px;
+}
+
+.center-vertical {
+    vertical-align: middle;
+    display: inline-block
+}
+
+.checkbox-option > div:last-child {
+    margin-top: 4px;
+}
+
+.help-icon {
+    background-image: url('../img/help.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    cursor: pointer;
+}

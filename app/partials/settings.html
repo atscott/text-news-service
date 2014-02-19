@@ -1,32 +1,60 @@
 <div class="container" id="settings_container">
-    <form class="input_group">
-        <fieldset>
-            <legend>Contact Settings</legend>
-            Phone Number <input type="text" class="form-control" ng-model="phoneNumber">
-            <br>
-            Twitter Handle <input type="text" class="form-control" ng-model="twitterHandle">
-            <br>
-            <div class="btn">
-                <input type="submit" value="Update" class="btn btn-primary" ng-click="updateContactInfo()">
-            </div>
-        </fieldset>
-    </form>
+    <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+        <form class="input_group">
+            <fieldset>
+                <legend>Contact Settings</legend>
+                <div class="help-text center-vertical">Change how you receive news updates.</div>
 
-    <br>
+                <div class="help-icon center-vertical" ng-click="setShowHelp(!showHelp)"></div>
 
-    <form class="input_group">
-        <fieldset>
-            <legend>Password Settings</legend>
-            Old Password <input type="password" class="form-control" ng_model="old_pwd">
-            <br>
-            New Password <input type="password" class="form-control" ng_model="new_pwd">
-            <br>
-            Confirm Password <input type="password" class="form-control" ng_model="confirm_pwd">
-            <br>
-            <div class="btn">
-                <button class="btn btn-primary" class="form-control" ng-click="changePassword()">Update</button>
-            </div>
-        </fieldset>
-    </form>
+                <alert class="alert-dismissable" ng-show="showHelp" type="'info'"
+                       close="setShowHelp(false)">
+                    <li>Text message - receive updates on your mobile device.</li>
+                    <li>Twitter - receive updates via direct messages to your Twitter account</li>
+                </alert>
 
+                <div class="left-buffer">
+                    <div class="checkbox-option top-buffer">
+                        <input type="checkbox" class="center-vertical" ng-model="smsPhone">
+
+                        <div class="center-vertical">Text message</div>
+                    </div>
+
+                    <input type="text" ng-model="phoneNumber" class="form-control top-buffer" ng-show="smsPhone"
+                           placeholder="Phone number">
+
+                    <div class="checkbox-option top-buffer">
+                        <input type="checkbox" class="center-vertical" ng-model="smsTwitter">
+
+                        <div class="twitter center-vertical"></div>
+                    </div>
+
+                    <input type="text" ng-model="twitterHandle" class="form-control top-buffer" ng-show="smsTwitter"
+                           placeholder="@twitterhandle">
+                    <br>
+                </div>
+                <div class="btn">
+                    <input type="submit" value="Update" class="btn btn-primary" ng-click="updateContactInfo()">
+                </div>
+            </fieldset>
+        </form>
+
+        <br>
+
+        <form class="input_group">
+            <fieldset>
+                <legend>Password Settings</legend>
+                Old Password <input type="password" class="form-control" ng_model="old_pwd">
+                <br>
+                New Password <input type="password" class="form-control" ng_model="new_pwd">
+                <br>
+                Confirm Password <input type="password" class="form-control" ng_model="confirm_pwd">
+                <br>
+
+                <div class="btn">
+                    <button class="btn btn-primary" class="form-control" ng-click="changePassword()">Update</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </div>
