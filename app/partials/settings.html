@@ -1,88 +1,95 @@
 <div ng-hide="loginSuccess" class="col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 well">
-    <legend><h3>Re-enter password</h3></legend>
-    <form ng-submit="attemptLogin()" name="loginForm">
-        <alert ng-show="loginError" class="alert-danger alert-dismissable" type="danger" close="loginError = null">
-            {{loginError.Message}}
-        </alert>
-        <div class="top-buffer row">
-            <input ng-model="password" name="password" required type="password" class="form-control"
-                   placeholder="Password">
-        </div>
-        <div class="top-buffer row">
-            <button type="submit" name="submit" class="btn btn-primary btn-block">Continue</button>
-        </div>
-    </form>
+  <legend><h3>Re-enter password</h3></legend>
+  <form ng-submit="attemptLogin()" name="loginForm">
+    <alert ng-show="loginError" class="alert-danger alert-dismissable" type="danger" close="loginError = null">
+      {{loginError.Message}}
+    </alert>
+    <div class="top-buffer row">
+      <input ng-model="password" name="password" required type="password" class="form-control" placeholder="Password">
+    </div>
+    <div class="top-buffer row">
+      <button type="submit" name="submit" class="btn btn-primary btn-block">Continue</button>
+    </div>
+  </form>
 </div>
 <div ng-show="loginSuccess" class="container" id="settings_container">
-    <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-        <form class="input_group" ng-submit="updateContactInfo()">
-            <fieldset>
-                <legend><h3>Contact Settings</h3></legend>
-                <div class="help-text center-vertical">Change how you receive news updates.</div>
+  <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    <form class="input_group" ng-submit="updateContactInfo()">
+      <fieldset>
+        <legend><h3>Contact Settings</h3></legend>
+        <div class="help-text center-vertical">Change how you receive news updates.</div>
 
-                <div class="help-icon center-vertical" ng-click="setShowHelp(!showHelp)"></div>
+        <div class="help-icon center-vertical" ng-click="setShowHelp(!showHelp)"></div>
 
-                <alert class="alert-dismissable" ng-show="showHelp" type="'info'"
-                       close="setShowHelp(false)">
-                    <ul>
-                        <li>Text message - receive updates on your mobile device via SMS.</li>
-                        <li>Twitter - receive updates via direct messages to your Twitter account</li>
-                    </ul>
-                </alert>
+        <alert class="alert-dismissable" ng-show="showHelp" type="'info'" close="setShowHelp(false)">
+          <ul>
+            <li>Text message - receive updates on your mobile device via SMS.</li>
+            <li>Twitter - receive updates via direct messages to your Twitter account</li>
+          </ul>
+        </alert>
 
-                <div class="left-buffer">
-                    <div class="checkbox-option top-buffer">
-                        <input type="checkbox" class="center-vertical" ng-model="smsPhone">
+        <div class="left-buffer">
+          <div class="checkbox-option top-buffer">
+            <input type="checkbox" class="center-vertical" ng-model="smsPhone">
 
-                        <div class="center-vertical">Text message</div>
-                    </div>
+            <div class="center-vertical">Text message</div>
+          </div>
 
-                    <input type="text" ng-model="phoneNumber" class="form-control top-buffer" ng-show="smsPhone"
-                           placeholder="Phone number">
+          <input type="text" ng-model="phoneNumber" class="form-control top-buffer" ng-show="smsPhone" placeholder="Phone number">
 
-                    <div class="checkbox-option top-buffer">
-                        <input type="checkbox" class="center-vertical" ng-model="smsTwitter">
+          <div class="checkbox-option top-buffer">
+            <input type="checkbox" class="center-vertical" ng-model="smsTwitter">
 
-                        <div class="center-vertical">Twitter</div>
-                    </div>
+            <div class="center-vertical">Twitter</div>
+          </div>
 
-                    <input type="text" ng-model="twitterHandle" class="form-control top-buffer" ng-show="smsTwitter"
-                           placeholder="@twitterhandle">
-                </div>
-                <div class="btn top-buffer">
-                    <input type="submit" value="Update" class="btn btn-primary" ng-click="updateContactInfo()">
-                </div>
-            </fieldset>
-        </form>
+          <input type="text" ng-model="twitterHandle" class="form-control top-buffer" ng-show="smsTwitter" placeholder="@twitterhandle">
+        </div>
+        <div class="btn top-buffer">
+          <input type="submit" value="Update" class="btn btn-primary" ng-click="updateContactInfo()">
+        </div>
+      </fieldset>
+    </form>
 
-        <br>
+    <alert ng-show="contactUpdateError" type="'error'" close="contactUpdateError = null">
+      {{contactUpdateError.Message}}
+    </alert>
+    <alert ng-show="contactUpdateSuccess" type="'success'" close="contactUpdateSuccess = null">
+      Contact info update successfully.
+    </alert>
 
-        <form name="changePassForm" class="input_group">
-            <fieldset>
-                <legend><h3>Password Settings</h3></legend>
-                <div class="top-buffer">New Password</div>
-                <input type="password" class="form-control" name="newPassword" ng-change="checkPasswords()"
-                       required ng-minlength="6" ng-blur="passwordBlurred=true" ng-model="newPassword">
+    <br>
 
-                <div class="error"
-                     ng-show="(changePassForm.newPassword.$error.minlength || changePassForm.newPassword.$error.required) &&
+    <form name="changePassForm" class="input_group">
+      <fieldset>
+        <legend><h3>Password Settings</h3></legend>
+        <div class="top-buffer">New Password</div>
+        <input type="password" class="form-control" name="newPassword" ng-change="checkPasswords()" required ng-minlength="6" ng-blur="passwordBlurred=true" ng-model="newPassword">
+
+        <div class="error" ng-show="(changePassForm.newPassword.$error.minlength || changePassForm.newPassword.$error.required) &&
                               (passwordBlurred || submitClicked)">
-                    You're password must be at least 6 characters.
-                </div>
+          You're password must be at least 6 characters.
+        </div>
 
-                <div class="top-buffer">Confirm Password</div>
-                <input type="password" class="form-control" name="confirmPassword"
-                       ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()" ng-model="confirmPassword">
+        <div class="top-buffer">Confirm Password</div>
+        <input type="password" class="form-control" name="confirmPassword" ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()" ng-model="confirmPassword">
 
-                <div class="error" ng-show="newPassword && !passwordsMatch">
-                    Passwords must match.
-                </div>
+        <div class="error" ng-show="newPassword && !passwordsMatch">
+          Passwords must match.
+        </div>
 
-                <div class="btn top-buffer">
-                    <button class="btn btn-primary" class="form-control" ng-click="changePassword()">Update</button>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-</div>
-</div>
+        <div ng-disabled="!passwordsMatch" class="btn top-buffer">
+          <button class="btn btn-primary" class="form-control" ng-click="changePassword()">Update</button>
+        </div>
+      </fieldset>
+    </form>
+
+    <alert ng-show="passwordUpdateError" type="'error'" close="passwordUpdateError = null">
+      {{passwordUpdateError.Message}}
+    </alert>
+    <alert ng-show="passwordUpdateSuccess" type="'success'" close="passwordUpdateSuccess = null">
+      Password update successfully.
+    </alert>
+
+  </div>
+</div></div>
