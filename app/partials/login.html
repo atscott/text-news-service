@@ -1,11 +1,9 @@
 <div class="container" id="loginContainer" style="padding-top: 4em">
   <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 well">
     <legend><h3>Text News Service Login</h3></legend>
-      <div class="row">
-        <alert ng-show="alert" class="alert-danger alert-dismissable" type="danger" close="closeAlert()">
-            {{ alert.msg }}
-        </alert>
-      </div>
+      <alert ng-show="alert" class="alert-danger alert-dismissable" type="danger" close="closeAlert()">
+        {{alert.msg}}
+      </alert>
       <form ng-submit="submit()" name="loginForm" class="login-form">
         <div class="row">
           <input required ng-model="user.email" type="text" class="form-control" placeholder="Email">
