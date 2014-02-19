@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e0902482-e306-4ca5-8c93-2478e09d4e87" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers.js" afterPath="$PROJECT_DIR$/app/js/controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/services.js" afterPath="$PROJECT_DIR$/app/js/services.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/partials/settings.html" afterPath="$PROJECT_DIR$/app/partials/settings.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.html" afterPath="$PROJECT_DIR$/app/index.html" />
     </list>
     <ignored path="text-news-service.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,10 +67,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="services.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/js/services.js">
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="41" selection-start="71" selection-end="71" vertical-scroll-proportion="0.054255318" vertical-offset="0" max-vertical-offset="3485">
+            <state line="15" column="18" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799">
               <folding />
             </state>
           </provider>
@@ -132,10 +130,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controllers.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="controllers.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="229" column="49" selection-start="7422" selection-end="7422" vertical-scroll-proportion="0.0" vertical-offset="3349" max-vertical-offset="4471">
+            <state line="252" column="0" selection-start="7911" selection-end="7911" vertical-scroll-proportion="0.6744681" vertical-offset="3650" max-vertical-offset="4590">
               <folding />
             </state>
           </provider>
@@ -153,7 +151,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="5" selection-start="353" selection-end="353" vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="1207">
+            <state line="35" column="64" selection-start="1619" selection-end="1619" vertical-scroll-proportion="-19.461538" vertical-offset="89" max-vertical-offset="1207">
               <folding />
             </state>
           </provider>
@@ -180,9 +178,10 @@
         <option value="$PROJECT_DIR$/app/partials/popular_feeds.html" />
         <option value="$PROJECT_DIR$/app/js/directives.js" />
         <option value="$PROJECT_DIR$/app/partials/subscriptions_list.html" />
-        <option value="$PROJECT_DIR$/app/js/controllers.js" />
         <option value="$PROJECT_DIR$/app/partials/settings.html" />
         <option value="$PROJECT_DIR$/app/js/services.js" />
+        <option value="$PROJECT_DIR$/app/index.html" />
+        <option value="$PROJECT_DIR$/app/js/controllers.js" />
       </list>
     </option>
   </component>
@@ -540,12 +539,12 @@
       <workItem from="1392675819851" duration="11134000" />
       <workItem from="1392689475229" duration="1341000" />
       <workItem from="1392733959741" duration="7708000" />
-      <workItem from="1392768688472" duration="1079000" />
+      <workItem from="1392768688472" duration="1739000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27677000" />
+    <option name="totallyTimeSpent" value="28337000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
@@ -864,13 +863,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="18" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/partials/manage_subscriptions.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="65" selection-start="808" selection-end="808" vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="493">
@@ -899,16 +891,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.html">
+    <entry file="file://$PROJECT_DIR$/app/partials/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="5" selection-start="353" selection-end="353" vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="1207">
+        <state line="1" column="2" selection-start="71" selection-end="71" vertical-scroll-proportion="-0.65384614" vertical-offset="0" max-vertical-offset="510">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/partials/login.html">
+    <entry file="file://$PROJECT_DIR$/app/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="2" selection-start="71" selection-end="71" vertical-scroll-proportion="-0.65384614" vertical-offset="0" max-vertical-offset="510">
+        <state line="3" column="41" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3485">
           <folding />
         </state>
       </provider>
@@ -920,16 +912,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/controllers.js">
+    <entry file="file://$PROJECT_DIR$/app/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="229" column="49" selection-start="7422" selection-end="7422" vertical-scroll-proportion="0.0" vertical-offset="3349" max-vertical-offset="4471">
+        <state line="15" column="18" selection-start="452" selection-end="452" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="846">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/services.js">
+    <entry file="file://$PROJECT_DIR$/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="41" selection-start="71" selection-end="71" vertical-scroll-proportion="0.054255318" vertical-offset="0" max-vertical-offset="3485">
+        <state line="35" column="64" selection-start="1619" selection-end="1619" vertical-scroll-proportion="-19.461538" vertical-offset="89" max-vertical-offset="1207">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="252" column="0" selection-start="7911" selection-end="7911" vertical-scroll-proportion="0.6744681" vertical-offset="3650" max-vertical-offset="4590">
           <folding />
         </state>
       </provider>

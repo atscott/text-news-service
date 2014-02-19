@@ -247,12 +247,19 @@ controllers.controller('NavBarCtrl', ['$scope', '$location', function ($scope, $
 
   updateEmail();
 
+  $scope.logout = function () {
+    currentUser = null;
+  };
+
   $scope.$on('$routeChangeStart', function () {
     if ($location.path() == '/login' || $location.path() == '/createAccount') {
       $scope.showNav = false;
     } else {
       $scope.showNav = true;
       updateEmail();
+      if (!currentUser) {
+        $location.path('/login');
+      }
     }
   });
 }]);
