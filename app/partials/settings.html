@@ -1,44 +1,55 @@
-<div class="container" id="settings_container">
-    <form class="input_group" ng-submit="updateContactInfo()">
-        <fieldset>
-            <legend><h3>Contact Settings</h3></legend>
-            Phone Number <input type="text" class="form-control" ng-model="phoneNumber">
-            <br>
-            Twitter Handle <input type="text" class="form-control" ng-model="twitterHandle">
-            <br>
-            <div>
-                <button type="submit" name="contact_submit" class="btn btn-primary">Update</button>
-            </div>
-        </fieldset>
-    </form>
+<div ng-hide="loginSuccess" class="col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 well">
+  <legend><h3>Re-enter password</h3></legend>
+  <form ng-submit="attemptLogin()" name="loginForm">
+    <alert ng-show="loginError" class="alert-danger alert-dismissable" type="danger" close="loginError = null">
+      {{loginError.Message}}
+    </alert>
+    <div class="top-buffer row">
+      <input ng-model="password" name="password" required type="password" class="form-control" placeholder="Password">
+    </div>
+    <div class="top-buffer row">
+      <button type="submit" name="submit" class="btn btn-primary btn-block">Continue</button>
+    </div>
+  </form>
+</div>
+<div ng-show="loginSuccess" class="container" id="settings_container">
+  <form class="input_group" ng-submit="updateContactInfo()">
+    <fieldset>
+      <legend><h3>Contact Settings</h3></legend>
+      Phone Number <input type="text" class="form-control" ng-model="phoneNumber">
+      <br>
+      Twitter Handle <input type="text" class="form-control" ng-model="twitterHandle">
+      <br>
 
-    <br>
+      <div>
+        <button type="submit" name="contact_submit" class="btn btn-primary">Update</button>
+      </div>
+    </fieldset>
+  </form>
 
-    <form name="changePassForm" class="input_group">
-        <fieldset>
-            <legend><h3>Password Settings</h3></legend>
-            <div class="top-buffer">New Password</div>
-            <input type="password" class="form-control" name="password" ng-change="checkPasswords()"
-                   required ng-minlength="6" ng-blur="passwordBlurred=true" ng-model="password">
+  <br>
 
-            <div class="error"
-                 ng-show="(changePassForm.password.$error.minlength || changePassForm.password.$error.required) &&
+  <form name="changePassForm" class="input_group">
+    <fieldset>
+      <legend><h3>Password Settings</h3></legend>
+      <div class="top-buffer">New Password</div>
+      <input type="password" class="form-control" name="password" ng-change="checkPasswords()" required ng-minlength="6" ng-blur="passwordBlurred=true" ng-model="password">
+
+      <div class="error" ng-show="(changePassForm.password.$error.minlength || changePassForm.password.$error.required) &&
                               (passwordBlurred || submitClicked)">
-                You're password must be at least 6 characters.
-            </div>
+        You're password must be at least 6 characters.
+      </div>
 
-            <div class="top-buffer">Confirm Password</div>
-            <input type="password" class="form-control" name="confirmPassword"
-                   ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()" ng-model="confirmPassword">
+      <div class="top-buffer">Confirm Password</div>
+      <input type="password" class="form-control" name="confirmPassword" ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()" ng-model="confirmPassword">
 
-            <div class="error" ng-show="password && !passwordsMatch">
-                Passwords must match.
-            </div>
+      <div class="error" ng-show="password && !passwordsMatch">
+        Passwords must match.
+      </div>
 
-            <div class="btn">
-                <button class="btn btn-primary" class="form-control" ng-click="changePassword()">Update</button>
-            </div>
-        </fieldset>
-    </form>
-
+      <div class="btn">
+        <button class="btn btn-primary" class="form-control" ng-click="changePassword()">Update</button>
+      </div>
+    </fieldset>
+  </form>
 </div>

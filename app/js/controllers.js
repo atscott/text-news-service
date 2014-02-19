@@ -67,7 +67,7 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
     $scope.removeSubscription = function (feed) {
       FeedManager.RemoveSubscriptionForCurrentUser(feed).then(function (response) {
         if (response.status != 200) {
-           var message = response.data.error;
+          var message = response.data.error;
           if (message == null || message.length < 1) {
             message = "Error code " + response.status;
           }
@@ -203,23 +203,38 @@ controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
   }]);
 
 controllers.controller('SettingsCtrl', ['$scope', 'Authentication', function ($scope, Authentication) {
-    $scope.password = '';
-    $scope.confirmPassword = '';
-    $scope.passwordsMatch = false;
-    $scope.twitterHandle = currentUser.twitterHandle;
-    $scope.phoneNumber = currentUser.phoneNumber;
+  $scope.password = '';
+  $scope.confirmPassword = '';
+  $scope.passwordsMatch = false;
+  $scope.twitterHandle = currentUser.twitterHandle;
+  $scope.phoneNumber = currentUser.phoneNumber;
 
-    $scope.checkPasswords = function () {
-        $scope.passwordsMatch = ($scope.password == $scope.confirmPassword);
-    };
+  $scope.checkPasswords = function () {
+    $scope.passwordsMatch = ($scope.password == $scope.confirmPassword);
+  };
 
-    $scope.changePassword = function () {
-        Authentication.updateUser($scope.password);
-    };
+  $scope.changePassword = function () {
+    Authentication.updateUser($scope.password);
+  };
 
-    $scope.updateContactInfo = function () {
-        Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber)
-    }
+  $scope.attemptLogin = function () {
+    Authentication.login(currentUser.email, $scope.password).then(function (response) {
+      if (response.status == 200) {
+        $scope.loginError = null;
+        $scope.loginSuccess = true;
+      } else {
+        var message = response.data.error;
+        if (message == null || message.length < 1) {
+          message = "Error code " + response.status;
+        }
+        $scope.loginError = {Message: "Login error: " + message};
+      }
+    })
+  };
+
+  $scope.updateContactInfo = function () {
+    Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber)
+  }
 }]);
 
 controllers.controller('NavBarCtrl', ['$scope', '$location', function ($scope, $location) {
@@ -227,13 +242,13 @@ controllers.controller('NavBarCtrl', ['$scope', '$location', function ($scope, $
   $scope.userEmail = '';
 
   function updateEmail() {
-      $scope.userEmail = ( currentUser ) ? currentUser.email : '';
+    $scope.userEmail = ( currentUser ) ? currentUser.email : '';
   }
 
   updateEmail();
 
-  $scope.$on('$routeChangeStart', function() {
-    if ( $location.path() == '/login' || $location.path() == '/createAccount' ) {
+  $scope.$on('$routeChangeStart', function () {
+    if ($location.path() == '/login' || $location.path() == '/createAccount') {
       $scope.showNav = false;
     } else {
       $scope.showNav = true;
