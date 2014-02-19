@@ -63,20 +63,20 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
             });
         };
 
-        $scope.removeSubscription = function (feed) {
-            FeedManager.RemoveSubscriptionForCurrentUser(feed).then(function (response) {
-                if (response.status != 200) {
-                    var message = response.data.error;
-                    if (message == null || message.length < 1) {
-                        message = "Error code " + response.status;
-                    }
-                    $scope.addError = {Message: "Could not remove subscription: " + message};
-                } else {
-                    $scope.clearRemoveError();
-                    KeyphraseManager.setSubscriptionBeingEdited(null);
-                }
-            });
-        };
+    $scope.removeSubscription = function (feed) {
+      FeedManager.RemoveSubscriptionForCurrentUser(feed).then(function (response) {
+        if (response.status != 200) {
+          var message = response.data.error;
+          if (message == null || message.length < 1) {
+            message = "Error code " + response.status;
+          }
+          $scope.removeError = {Message: "Could not remove subscription: " + message};
+        } else {
+          $scope.clearRemoveError();
+          KeyphraseManager.setSubscriptionBeingEdited(null);
+        }
+      });
+    };
 
         $scope.editKeyphrasesForFeed = function (feed) {
             KeyphraseManager.setSubscriptionBeingEdited(feed);
