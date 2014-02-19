@@ -256,6 +256,12 @@ controllers.controller('SettingsCtrl', ['$scope', 'Authentication', function ($s
   };
 
   $scope.updateContactInfo = function () {
+    if(!$scope.smsPhone){
+      $scope.phoneNumber = null;
+    }
+    if(!$scope.smsTwitter){
+      $scope.twitterHandle = null;
+    }
     Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber).then(function (response) {
       if (response.status == 200) {
         $scope.contactUpdateError = null;
