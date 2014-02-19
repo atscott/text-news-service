@@ -104,9 +104,10 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
       return deferred.promise;
     },
     RemoveSubscriptionForCurrentUser: function (feed) {
+      var feedLinkUriEncoded = encodeURIComponent(feed.link);
       return $http({
         method: "DELETE",
-        url: serverBaseUrl + '/user/' + currentUser.email + '/subscription?feed=' + feed.link,
+        url: serverBaseUrl + '/user/' + currentUser.email + '/subscription?feed=' + feedLinkUriEncoded,
         crossDomain: true
       }).then(function (response) {
         $.each(currentUser.subscriptions, function (index) {
