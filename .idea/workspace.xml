@@ -106,7 +106,7 @@
       <file leaf-file-name="manage_keyphrases.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/partials/manage_keyphrases.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="28" selection-start="54" selection-end="54" vertical-scroll-proportion="0.018599562" vertical-offset="0" max-vertical-offset="914">
+            <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="914">
               <folding />
             </state>
           </provider>
@@ -522,12 +522,12 @@
       <workItem from="1392689475229" duration="1341000" />
       <workItem from="1392733959741" duration="7708000" />
       <workItem from="1392768688472" duration="2527000" />
-      <workItem from="1392772597607" duration="178000" />
+      <workItem from="1392772597607" duration="468000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29303000" />
+    <option name="totallyTimeSpent" value="29593000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
@@ -918,7 +918,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/partials/manage_keyphrases.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="28" selection-start="54" selection-end="54" vertical-scroll-proportion="0.018599562" vertical-offset="0" max-vertical-offset="914">
+        <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="914">
           <folding />
         </state>
       </provider>
