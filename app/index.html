@@ -11,7 +11,7 @@
 <body>
 
 <nav ng-show="showNav" ng-controller="NavBarCtrl" class="navbar navbar-default " role="navigation">
-    <div class="container-fluid">
+    <div ng-cloak class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#navbar-collapse">
@@ -33,7 +33,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ userEmail }}&nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#/settings">Settings</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="#/login" ng-click="logout()">Logout</a></li>
                     </ul>
                 </li>
             </ul>

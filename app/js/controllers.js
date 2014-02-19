@@ -1,7 +1,6 @@
 'use strict';
 
 /* Controllers */
-
 var controllers = angular.module('myApp.controllers', []);
 
 controllers.controller('LoginCtrl', ['$scope', '$location', 'Authentication', function ($scope, $location, Authentication) {
@@ -64,20 +63,20 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
             });
         };
 
-    $scope.removeSubscription = function (feed) {
-      FeedManager.RemoveSubscriptionForCurrentUser(feed).then(function (response) {
-        if (response.status != 200) {
-           var message = response.data.error;
-          if (message == null || message.length < 1) {
-            message = "Error code " + response.status;
-          }
-          $scope.addError = {Message: "Could not remove subscription: " + message};
-        } else {
-          $scope.clearRemoveError();
-          KeyphraseManager.setSubscriptionBeingEdited(null);
-        }
-      });
-    };
+        $scope.removeSubscription = function (feed) {
+            FeedManager.RemoveSubscriptionForCurrentUser(feed).then(function (response) {
+                if (response.status != 200) {
+                    var message = response.data.error;
+                    if (message == null || message.length < 1) {
+                        message = "Error code " + response.status;
+                    }
+                    $scope.addError = {Message: "Could not remove subscription: " + message};
+                } else {
+                    $scope.clearRemoveError();
+                    KeyphraseManager.setSubscriptionBeingEdited(null);
+                }
+            });
+        };
 
         $scope.editKeyphrasesForFeed = function (feed) {
             KeyphraseManager.setSubscriptionBeingEdited(feed);
@@ -102,7 +101,7 @@ controllers.controller('CreateAccountCtrl', ['$scope', 'Authentication', '$locat
         $scope.passwordsMatch = ($scope.password == $scope.confirmPassword);
     };
 
-    $scope.setShowHelp = function(showHelp) {
+    $scope.setShowHelp = function (showHelp) {
         $scope.showHelp = showHelp;
     }
 
@@ -208,46 +207,77 @@ controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
     }]);
 
 controllers.controller('SettingsCtrl', ['$scope', 'Authentication', function ($scope, Authentication) {
-    $scope.password = '';
+    $scope.newPassword = '';
     $scope.confirmPassword = '';
     $scope.passwordsMatch = false;
     $scope.twitterHandle = currentUser.twitterHandle;
     $scope.phoneNumber = currentUser.phoneNumber;
-	$scope.showHelp = false;
+    $scope.smsPhone = Boolean(currentUser.phoneNumber);
+    $scope.smsTwitter = Boolean(currentUser.twitterHandle);
+    $scope.showHelp = false;
 
     $scope.checkPasswords = function () {
-        $scope.passwordsMatch = ($scope.password == $scope.confirmPassword);
+        $scope.passwordsMatch = ($scope.newPassword == $scope.confirmPassword);
     };
 
     $scope.changePassword = function () {
-        Authentication.updateUser($scope.password);
+        Authentication.updateUser($scope.newPassword);
+    };
+
+    $scope.attemptLogin = function () {
+        Authentication.login(currentUser.email, $scope.password).then(function (response) {
+            if (response.status == 200) {
+                $scope.loginError = null;
+                $scope.loginSuccess = true;
+            } else {
+                var message = response.data.error;
+                if (message == null || message.length < 1) {
+                    message = "Error code " + response.status;
+                }
+                $scope.loginError = {Message: "Login error: " + message};
+            }
+        })
     };
 
     $scope.updateContactInfo = function () {
         Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber)
     }
 
-	$scope.setShowHelp = function(showHelp) {
+    $scope.setShowHelp = function (showHelp) {
         $scope.showHelp = showHelp;
     }
 }]);
 
 controllers.controller('NavBarCtrl', ['$scope', '$location', function ($scope, $location) {
-  $scope.showNav = false;
-  $scope.userEmail = '';
+    $scope.showNav = false;
+    $scope.userEmail = '';
 
-  function updateEmail() {
-      $scope.userEmail = ( currentUser ) ? currentUser.email : '';
-  }
-
-  updateEmail();
-
-  $scope.$on('$routeChangeStart', function() {
-    if ( $location.path() == '/login' || $location.path() == '/createAccount' ) {
-      $scope.showNav = false;
-    } else {
-      $scope.showNav = true;
-      updateEmail();
+    function updateEmail() {
+        $scope.userEmail = ( currentUser ) ? currentUser.email : '';
     }
-  });
+
+    updateEmail();
+
+    $scope.logout = function () {
+        currentUser = null;
+        $.cookie('currentUser', null);
+    };
+
+    $scope.$on('$routeChangeStart', function () {
+        if ($location.path() == '/login' || $location.path() == '/createAccount') {
+            $scope.showNav = false;
+        } else {
+            $scope.showNav = true;
+            if (!currentUser) {
+                var userCookie = $.cookie('currentUser');
+                if (userCookie) {
+                    currentUser = JSON.parse(userCookie);
+                }
+                if (!currentUser) {
+                    $location.path('/login');
+                }
+            }
+            updateEmail();
+        }
+    });
 }]);

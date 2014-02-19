@@ -31,14 +31,16 @@
                 </div>
                 <br>
 
-                <div class="help-text center-vertical">Select how you would like to receive news updates.</div>
+                <div class="help-text center-vertical">Choose how to receive news updates.</div>
 
                 <div class="help-icon center-vertical" ng-click="setShowHelp(!showHelp)"></div>
 
                 <alert class="alert-dismissable" ng-show="showHelp" type="'info'"
                        close="setShowHelp(false)">
-                    <li>Text message - receive updates on your mobile device.</li>
+                    <ul>
+                    <li>Text message - receive updates on your mobile device via SMS.</li>
                     <li>Twitter - receive updates via direct messages to your Twitter account</li>
+                        </ul>
                 </alert>
 
                 <div class="left-buffer">
