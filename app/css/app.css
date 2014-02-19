@@ -96,3 +96,13 @@
     margin: -5px 0;
     padding-left: 15px;
 }
+
+/* #region Login and Sign up*/
+.login-form, .sign-up-form {
+    padding: 0 40px 5px;
+}
+.btm-row {
+    float: none;
+    text-align: center;
+}
+/* #endregion Login and Create Account */

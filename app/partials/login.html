@@ -1,24 +1,23 @@
 <div class="container" id="loginContainer" style="padding-top: 4em">
-    <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 well">
-      <legend><h3>Text News Service Login</h3></legend>
+  <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-8 col-sm-offset-2 well">
+    <legend><h3>Text News Service Login</h3></legend>
       <div class="row">
         <alert ng-show="alert" class="alert-danger alert-dismissable" type="danger" close="closeAlert()">{{alert.msg}}
         </alert>
       </div>
-      <form ng-submit="submit()" name="loginForm">
+      <form ng-submit="submit()" name="loginForm" class="login-form">
         <div class="row">
-            <input required ng-model="user.email" type="text" class="form-control" placeholder="Email">
+          <input required ng-model="user.email" type="text" class="form-control" placeholder="Email">
         </div>
-
-        <div class="top-buffer row">
+          <div class="top-buffer row">
             <input ng-model="user.password" name="password" required type="password" class="form-control"
                    placeholder="Password">
-        </div>
-        <div class="top-buffer row">
-          <button type="submit" name="submit" class="btn btn-primary btn-block">Sign in</button>
-        </div>
-      </form>
-      <div class="top-buffer">Don't have an account? <a href="#/createAccount">Sign up</a> for free.</div>
+          </div>
+          <div class="top-buffer row">
+            <button type="submit" name="submit" class="btn btn-primary btn-block">Sign in</button>
+          </div>
+        </form>
+        <div class="top-buffer btm-row">Don't have an account? <a href="#/createAccount">Sign up</a> for free.</div>
     </div>
 </div>
 
