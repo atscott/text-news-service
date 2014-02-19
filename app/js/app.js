@@ -1,6 +1,7 @@
 'use strict';
 
 google.load("feeds", "1");
+var currentUser;
 
 // Declare app level module which depends on filters, and services
 var application = angular.module('myApp', [

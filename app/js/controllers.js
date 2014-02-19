@@ -1,7 +1,6 @@
 'use strict';
 
 /* Controllers */
-
 var controllers = angular.module('myApp.controllers', []);
 
 controllers.controller('LoginCtrl', ['$scope', '$location', 'Authentication', function ($scope, $location, Authentication) {
@@ -249,6 +248,7 @@ controllers.controller('NavBarCtrl', ['$scope', '$location', function ($scope, $
 
   $scope.logout = function () {
     currentUser = null;
+    $.cookie('currentUser', null);
   };
 
   $scope.$on('$routeChangeStart', function () {
@@ -256,10 +256,16 @@ controllers.controller('NavBarCtrl', ['$scope', '$location', function ($scope, $
       $scope.showNav = false;
     } else {
       $scope.showNav = true;
-      updateEmail();
       if (!currentUser) {
-        $location.path('/login');
+        var userCookie = $.cookie('currentUser');
+        if (userCookie) {
+          currentUser = JSON.parse(userCookie);
+        }
+        if (!currentUser) {
+          $location.path('/login');
+        }
       }
+      updateEmail();
     }
   });
 }]);

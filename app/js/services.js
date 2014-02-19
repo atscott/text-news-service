@@ -3,22 +3,9 @@
 /* Services */
 var serverBaseUrl = 'http://75.86.148.205';
 
-var users = [
-  { twitterHandle: '', password: 'Scott', email: 'atscott01@gmail.com', subscriptions: []},
-  { twitterHandle: '', password: 'user', email: 'scottat@msoe.edu', subscriptions: []}
-];
-var currentUser;
-
 window.onbeforeunload = function () {
   $.cookie('currentUser', JSON.stringify(currentUser));
 };
-
-$(function () {
-  var userCookie = $.cookie('currentUser');
-  if (userCookie) {
-    currentUser = JSON.parse(userCookie);
-  }
-});
 
 var services = angular.module('myApp.services', []);
 
@@ -49,6 +36,9 @@ services.factory('Authentication', ['$http', function ($http) {
         console.log(responseError);
         return responseError;
       });
+    },
+    setCurrentUserWithCookie: function () {
+
     },
     createUser: function (email, password, twitter, phone) {
       return $http({
@@ -119,9 +109,9 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
         url: serverBaseUrl + '/user/' + currentUser.email + '/subscription?feed=' + feed.link,
         crossDomain: true
       }).then(function (response) {
-        $.each(currentUser.subscriptions, function(index){
-          if(this.feed.link == feed.link){
-            currentUser.subscriptions.splice(index,1);
+        $.each(currentUser.subscriptions, function (index) {
+          if (this.feed.link == feed.link) {
+            currentUser.subscriptions.splice(index, 1);
             return false;
           }
         });
