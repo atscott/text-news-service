@@ -1,6 +1,6 @@
-<div class="container" id="loginContainer">
+<div class="container" id="loginContainer" style="padding-top: 4em">
     <div class="col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 well">
-      <legend>Text News Service Login</legend>
+      <legend><h3>Text News Service Login</h3></legend>
       <div class="row">
         <alert ng-show="alert" class="alert-danger alert-dismissable" type="danger" close="closeAlert()">{{alert.msg}}
         </alert>
@@ -15,7 +15,7 @@
                    placeholder="Password">
         </div>
         <div class=" top-buffer row">
-          <button type="submit" name="submit" class="btn btn-info btn-block">Sign in</button>
+          <button type="submit" name="submit" class="btn btn-primary btn-block">Sign in</button>
         </div>
       </form>
       <div class="top-buffer">Don't have an account? <a href="#/createAccount">Sign up</a> for free.</div>

@@ -64,16 +64,20 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
             });
         };
 
-        $scope.removeSubscription = function (feedUrl) {
-            FeedManager.RemoveSubscriptionForCurrentUser(feedUrl).then(function (response) {
-                if (response.status != 200) {
-                    $scope.removeError = {Message: "Error removing subscription " + response.data.Message};
-                } else {
-                    $scope.clearRemoveError();
-                    KeyphraseManager.setSubscriptionBeingEdited(null);
-                }
-            });
-        };
+    $scope.removeSubscription = function (feed) {
+      FeedManager.RemoveSubscriptionForCurrentUser(feed).then(function (response) {
+        if (response.status != 200) {
+           var message = response.data.error;
+          if (message == null || message.length < 1) {
+            message = "Error code " + response.status;
+          }
+          $scope.addError = {Message: "Could not remove subscription: " + message};
+        } else {
+          $scope.clearRemoveError();
+          KeyphraseManager.setSubscriptionBeingEdited(null);
+        }
+      });
+    };
 
         $scope.editKeyphrasesForFeed = function (feed) {
             KeyphraseManager.setSubscriptionBeingEdited(feed);
@@ -204,21 +208,46 @@ controllers.controller('PopularFeedsCtrl', ['$scope', 'FeedManager',
     }]);
 
 controllers.controller('SettingsCtrl', ['$scope', 'Authentication', function ($scope, Authentication) {
+    $scope.password = '';
+    $scope.confirmPassword = '';
+    $scope.passwordsMatch = false;
     $scope.twitterHandle = currentUser.twitterHandle;
     $scope.phoneNumber = currentUser.phoneNumber;
-    $scope.smsPhone = currentUser.phoneNumber ? true : false;
-    $scope.smsTwitter = currentUser.twitterHandle ? true : false;
-    $scope.showHelp = false;
+	$scope.showHelp = false;
+
+    $scope.checkPasswords = function () {
+        $scope.passwordsMatch = ($scope.password == $scope.confirmPassword);
+    };
 
     $scope.changePassword = function () {
-        Authentication.updateUser($scope.new_pwd);
+        Authentication.updateUser($scope.password);
     };
 
     $scope.updateContactInfo = function () {
         Authentication.updateUser(null, $scope.twitterHandle, $scope.phoneNumber)
     }
 
-    $scope.setShowHelp = function(showHelp) {
+	$scope.setShowHelp = function(showHelp) {
         $scope.showHelp = showHelp;
     }
+}]);
+
+controllers.controller('NavBarCtrl', ['$scope', '$location', function ($scope, $location) {
+  $scope.showNav = false;
+  $scope.userEmail = '';
+
+  function updateEmail() {
+      $scope.userEmail = ( currentUser ) ? currentUser.email : '';
+  }
+
+  updateEmail();
+
+  $scope.$on('$routeChangeStart', function() {
+    if ( $location.path() == '/login' || $location.path() == '/createAccount' ) {
+      $scope.showNav = false;
+    } else {
+      $scope.showNav = true;
+      updateEmail();
+    }
+  });
 }]);

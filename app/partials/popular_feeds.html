@@ -1,6 +1,4 @@
-<div class="col-lg-8">
-  <h3>Popular Feeds</h3>
-</div>
+<legend><h3>Popular Feeds</h3></legend>
 <div class="table-responsive">
   <table class="table table-striped ">
     <thead>
@@ -20,7 +18,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="feed in popularFeeds | orderBy:'count':reverse">
+    <tr ng-repeat="feed in popularFeeds | orderBy:'subscriberCount':reverse">
       <td>
         {{$index + 1}}
       </td>
@@ -28,10 +26,10 @@
         {{feed.title}}
       </td>
       <td>
-        {{feed.url}}
+        {{feed.link}}
       </td>
       <td>
-        {{feed.count}}
+        {{feed.subscriberCount}}
       </td>
     </tr>
     </tbody>

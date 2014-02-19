@@ -1,8 +1,8 @@
 <div class="container" id="settings_container">
     <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-        <form class="input_group">
+    	<form class="input_group" ng-submit="updateContactInfo()">
             <fieldset>
-                <legend>Contact Settings</legend>
+                <legend><h3>Contact Settings</h3></legend>
                 <div class="help-text center-vertical">Change how you receive news updates.</div>
 
                 <div class="help-icon center-vertical" ng-click="setShowHelp(!showHelp)"></div>
@@ -19,13 +19,13 @@
 
                         <div class="center-vertical">Text message</div>
                     </div>
-
+        
                     <input type="text" ng-model="phoneNumber" class="form-control top-buffer" ng-show="smsPhone"
                            placeholder="Phone number">
 
                     <div class="checkbox-option top-buffer">
                         <input type="checkbox" class="center-vertical" ng-model="smsTwitter">
-
+        
                         <div class="twitter center-vertical"></div>
                     </div>
 
@@ -41,15 +41,27 @@
 
         <br>
 
-        <form class="input_group">
+        <form name="changePassForm" class="input_group">
             <fieldset>
-                <legend>Password Settings</legend>
-                Old Password <input type="password" class="form-control" ng_model="old_pwd">
-                <br>
-                New Password <input type="password" class="form-control" ng_model="new_pwd">
-                <br>
-                Confirm Password <input type="password" class="form-control" ng_model="confirm_pwd">
-                <br>
+               <legend><h3>Password Settings</h3></legend>
+            <div class="top-buffer">New Password</div>
+            <input type="password" class="form-control" name="password" ng-change="checkPasswords()"
+                   required ng-minlength="6" ng-blur="passwordBlurred=true" ng-model="password">
+
+            <div class="error"
+                 ng-show="(changePassForm.password.$error.minlength || changePassForm.password.$error.required) &&
+                              (passwordBlurred || submitClicked)">
+                You're password must be at least 6 characters.
+            </div>
+
+            <div class="top-buffer">Confirm Password</div>
+            <input type="password" class="form-control" name="confirmPassword"
+                   ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()" ng-model="confirmPassword">
+
+            <div class="error" ng-show="password && !passwordsMatch">
+                Passwords must match.
+            </div>
+
 
                 <div class="btn">
                     <button class="btn btn-primary" class="form-control" ng-click="changePassword()">Update</button>

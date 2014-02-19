@@ -11,9 +11,9 @@ directives.directive('appVersion', ['version', function (version) {
 
 directives.directive('subscriptionList', function () {
   function link(scope) {
-    scope.removeSubscription = function (itemUrl) {
+    scope.removeSubscription = function (item) {
       var expressionHandler = scope.removeSubscriptionCallback();
-      expressionHandler(itemUrl);
+      expressionHandler(item);
     };
 
     scope.editKeyphrasesForFeed = function (item) {
