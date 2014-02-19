@@ -7,13 +7,16 @@
                     <input type="text" class="form-control" name="email" required ng-blur="emailBlurred=true"
                            ng-model="email" placeholder="Email">
 
-                    <div class="error" ng-show="newAccountForm.email.$error.required && (emailBlurred || submitClicked)">
+                    <div class="error"
+                         ng-show="newAccountForm.email.$error.required && (emailBlurred || submitClicked)">
                         A valid email is required to create an account.
                     </div>
                 </div>
                 <div class="top-buffer row">
-                    <input type="password" class="form-control" name="password" ng-change="checkPasswords()" required ng-minlength="6"
+                    <input type="password" class="form-control" name="password" ng-change="checkPasswords()" required
+                           ng-minlength="6"
                            ng-blur="passwordBlurred=true" ng-model="password" placeholder="Password">
+
                     <div class="error"
                          ng-show="(newAccountForm.password.$error.minlength || newAccountForm.password.$error.required) &&
                                   (passwordBlurred || submitClicked)">
@@ -23,7 +26,8 @@
 
                 <div class="top-buffer row">
                     <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password"
-                           ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()" ng-model="confirmPassword">
+                           ng-focus="confirmPasswordHadFocus=true" ng-change="checkPasswords()"
+                           ng-model="confirmPassword">
 
                     <div class="error" ng-show="password && !passwordsMatch">
                         Passwords must match.
@@ -38,9 +42,9 @@
                 <alert class="alert-dismissable" ng-show="showHelp" type="'info'"
                        close="setShowHelp(false)">
                     <ul>
-                    <li>Text message - receive updates on your mobile device via SMS.</li>
-                    <li>Twitter - receive updates via direct messages to your Twitter account</li>
-                        </ul>
+                        <li>Text message - receive updates on your mobile device via SMS.</li>
+                        <li>Twitter - receive updates via direct messages to your Twitter account</li>
+                    </ul>
                 </alert>
 
                 <div class="left-buffer">
@@ -63,10 +67,12 @@
                         <input type="text" ng-model="twitterHandle" class="form-control top-buffer" ng-show="smsTwitter"
                                placeholder="@twitterhandle">
                         <br>
-                </div>
-                <div class="top-buffer row">
-                    <button class="btn btn-primary btn-block" ng-click="submitClicked=true; createAccount()">Create Account</button>
-                </div>
+                    </div>
+                    <div class="top-buffer row">
+                        <button class="btn btn-primary btn-block" ng-click="submitClicked=true; createAccount()">Create
+                            Account
+                        </button>
+                    </div>
             </fieldset>
         </form>
         <div class="top-buffer">Already have an account? <a href="#/login">Sign in</a>.</div>

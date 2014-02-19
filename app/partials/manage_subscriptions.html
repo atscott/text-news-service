@@ -10,14 +10,27 @@
         </div>
     </form>
     <alert ng-show="addError" class="alert-danger alert-dismissable" type="danger"
-        close="addError = null">{{addError.Message}}
+           close="addError = null">{{addError.Message}}
+    </alert>
+
+    <div class="help-text-small left-buffer center-vertical">What is this?</div>
+
+    <div class="help-icon center-vertical" ng-click="setShowHelp(!showHelp)"></div>
+
+    <alert class="alert-dismissable" ng-show="showHelp" type="'info'"
+           close="setShowHelp(false)">
+        Here you can paste the address of an XML formatted RSS feed you want to subscribe to. If you are
+        having trouble finding RSS feeds, the following link is a good place to start. <a target="_blank"
+            href="http://www.thefreedictionary.com/_/rss-directory.htm">Click here to browse feeds.</a>
     </alert>
 </div>
 
 <div class="col-lg-8">
     <legend><h3>Current Subscriptions</h3></legend>
-    <alert ng-show="removeError" class="alert-danger alert-dismissable" type="danger" close="clearRemoveError()">{{removeError.Message}}
+    <alert ng-show="removeError" class="alert-danger alert-dismissable" type="danger" close="clearRemoveError()">
+        {{removeError.Message}}
     </alert>
-    <subscription-list edit-keyphrases-callback="editKeyphrasesForFeed" remove-subscription-callback="removeSubscription"
+    <subscription-list edit-keyphrases-callback="editKeyphrasesForFeed"
+                       remove-subscription-callback="removeSubscription"
                        subscriptions="subscriptions"></subscription-list>
 </div>

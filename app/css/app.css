@@ -59,6 +59,10 @@
     font-size: 16px;
 }
 
+.help-text {
+    font-size: 12px;
+}
+
 .twitter {
     background-image: url('../img/twitter.png');
     background-repeat: no-repeat;

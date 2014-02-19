@@ -33,6 +33,7 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
     function ($scope, FeedManager, KeyphraseManager, $location) {
         $scope.subscriptions = [];
         $scope.feed = {};
+        $scope.showHelp = false;
 
         $scope.getUserSubscriptions = function () {
             FeedManager.GetSubscriptionsForCurrentUser().then(function (response) {
@@ -86,6 +87,10 @@ controllers.controller('ManageSubscriptionsCtrl', ['$scope', 'FeedManager', 'Key
         $scope.clearRemoveError = function () {
             $scope.removeError = null;
         };
+
+        $scope.setShowHelp = function (showHelp) {
+            $scope.showHelp = showHelp;
+        }
 
     }]);
 
