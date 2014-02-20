@@ -2,7 +2,8 @@
     <legend><h3>Add Subscriptions</h3></legend>
     <form>
         <div class="input-group">
-            <input type="text" class="form-control" ng-model="feed.url"/>
+          <span class="input-group-addon">Feed:</span>
+            <input type="text" class="form-control" placeholder="Ex: http://www.npr.org/rss/rss.php?id=1022" ng-model="feed.url"/>
 
             <div class="input-group-btn">
                 <button class="btn btn-primary" ng-click="addFeed()">Add</button>
