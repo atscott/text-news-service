@@ -130,6 +130,7 @@ controllers.controller('CreateAccountCtrl', ['$scope', 'Authentication', '$locat
 controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 'subscription', function ($scope, KeyphraseManager, subscription) {
   $scope.keyphrases = subscription.keyphrases;
   $scope.feedTitle = subscription.feed.title;
+  $scope.showHelp = false;
 
   $scope.editKeyphrase = function (keyphrase) {
     $scope.copyOfKeyphraseBeingEdited = $.extend({}, keyphrase);
@@ -169,8 +170,7 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 's
           $scope.removeError = {Message: "Could not remove keyphrase: " + message};
         }
       }
-    )
-    ;
+    );
   };
 
   $scope.cancelEdit = function () {
@@ -184,6 +184,10 @@ controllers.controller('ManageKeyphrasesCtrl', ['$scope', 'KeyphraseManager', 's
         $scope.copyOfKeyphraseBeingEdited = null;
       }
     });
+  }
+
+  $scope.setShowHelp = function (showHelp) {
+    $scope.showHelp = showHelp;
   }
 }])
 ;

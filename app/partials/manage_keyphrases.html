@@ -1,42 +1,56 @@
-<div >
-  <legend><h3>Keyphrases for Feed: {{feedTitle}}</h3></legend>
+<div>
+    <legend><h3>Keyphrases for Feed: {{feedTitle}}</h3></legend>
 </div>
 <div class="col-lg-4">
-  <div ng-hide="keyphraseBeingEdited">
-    <h3>Add Keyphrase</h3>
+    <div ng-hide="keyphraseBeingEdited">
+        <h3>Add Keyphrase</h3>
 
-    <form>
-      <div class="input-group">
-        <input type="text" class="form-control" ng-model="keyphrase.keyphrase"/>
+        <form>
+            <div class="input-group">
+                <input type="text" class="form-control" ng-model="keyphrase.keyphrase"/>
 
-        <div class="input-group-btn">
-          <button class="btn btn-primary" ng-click="addKeyphrase()">Add</button>
-        </div>
-      </div>
-    </form>
-    <alert ng-show="addError" class="alert-danger alert-dismissable" type="danger" close="addError = null">{{addError.Message}}
-    </alert>
-  </div>
-  <div ng-show="keyphraseBeingEdited">
-    <h3>Edit Keyphrase</h3>
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" ng-click="addKeyphrase()">Add</button>
+                </div>
+            </div>
+        </form>
+        <alert ng-show="addError" class="alert-danger alert-dismissable" type="danger" close="addError = null">
+            {{addError.Message}}
+        </alert>
 
-    <form>
-      <div class="input-group">
-        <input type="text" id="keyphraseEdit" class="form-control" ng-model="copyOfKeyphraseBeingEdited.keyphrase"/>
+        <div class="help-text-small left-buffer center-vertical">What is this?</div>
 
-        <div class="input-group-btn">
-          <button type="submit" name="submit" ng-click="saveEdit()" class="btn btn-primary ">Save</button>
-          <button class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
-        </div>
-      </div>
-    </form>
+        <div class="help-icon center-vertical" ng-click="setShowHelp(!showHelp)"></div>
 
-    <div ng-show="saveEditError" class="alert alert-danger">{{saveEditError.Message}}</div>
-  </div>
+        <alert class="alert-dismissable" ng-show="showHelp" type="'info'"
+               close="setShowHelp(false)">
+            Adding keyphrases to a subscription limits the updates you receive. Notifications will be sent to your
+            phone or Twitter account only when they contain one or more of the keyphrases.
+        </alert>
+    </div>
+    <div ng-show="keyphraseBeingEdited">
+        <h3>Edit Keyphrase</h3>
+
+        <form>
+            <div class="input-group">
+                <input type="text" id="keyphraseEdit" class="form-control"
+                       ng-model="copyOfKeyphraseBeingEdited.keyphrase"/>
+
+                <div class="input-group-btn">
+                    <button type="submit" name="submit" ng-click="saveEdit()" class="btn btn-primary ">Save</button>
+                    <button class="btn btn-danger" ng-click="cancelEdit()">Cancel</button>
+                </div>
+            </div>
+        </form>
+
+        <div ng-show="saveEditError" class="alert alert-danger">{{saveEditError.Message}}</div>
+    </div>
 </div>
 <div class="col-lg-8">
-  <h3>Current Keyphrases</h3>
-  <alert ng-show="removeError" class="alert-danger alert-dismissable" type="danger" close="removeError = null">{{removeError.Message}}
-  </alert>
-  <keyphrase-list remove-keyphrase-callback="removeKeyphrase" edit-keyphrase-callback="editKeyphrase" keyphrases="keyphrases"></keyphrase-list>
+    <h3>Current Keyphrases</h3>
+    <alert ng-show="removeError" class="alert-danger alert-dismissable" type="danger" close="removeError = null">
+        {{removeError.Message}}
+    </alert>
+    <keyphrase-list remove-keyphrase-callback="removeKeyphrase" edit-keyphrase-callback="editKeyphrase"
+                    keyphrases="keyphrases"></keyphrase-list>
 </div>
