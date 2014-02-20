@@ -51,14 +51,16 @@
                           Are you sure you want to remove the subscription '{{subscription.feed.title}}'?
                       </div>
                       <div class="modal-footer">
-                          <button type="button" class="btn btn-default"
-                                  data-dismiss="modal">
-                              No
-                          </button>
-                          <button type="button" ng-click="removeSubscription(subscription.feed)" class="btn btn-primary"
-                                  data-dismiss="modal">
-                              Yes
-                          </button>
+                          <div class="btn-group-centered">
+                              <button type="button" ng-click="removeSubscription(subscription.feed)" class="btn btn-primary"
+                                      data-dismiss="modal">
+                                  Yes
+                              </button>
+                              <button type="button" class="btn btn-default"
+                                      data-dismiss="modal">
+                                No
+                              </button>
+                          </div>
                       </div>
                   </div>
               </div>
