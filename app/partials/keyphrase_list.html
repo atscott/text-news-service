@@ -29,7 +29,37 @@
         <span focus-edit ng-click="editKeyphrase(keyphrase)" class="pointer glyphicon glyphicon-edit"></span>
       </td>
       <td class="text-center">
-        <span ng-click="removeKeyphrase(keyphrase)" class="pointer glyphicon glyphicon-remove"></span>
+
+        <!-- Trigger modal -->
+        <span data-toggle="modal" data-target="#modal-{{$index}}" class="pointer glyphicon glyphicon-remove"></span>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal-{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to delete the keyphrase '{{keyphrase.keyphrase}}'?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                  No
+                </button>
+                <button type="button" ng-click="removeKeyphrase(keyphrase)" class="btn btn-primary"
+                        data-dismiss="modal">
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </td>
     </tr>
     </tbody>

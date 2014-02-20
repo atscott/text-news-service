@@ -14,6 +14,7 @@ services.factory('Authentication', ['$http', function ($http) {
     login: function (email, password) {
       return $http({
         method: "POST",
+        timeout:2000,
         url: serverBaseUrl + '/auth/login',
         crossDomain: true,
         data: JSON.stringify({email: email, password: password})
@@ -28,6 +29,7 @@ services.factory('Authentication', ['$http', function ($http) {
     getUser: function (email) {
       return $http({
         method: "GET",
+        timeout:2000,
         url: serverBaseUrl + '/user/' + email,
         crossDomain: true
       }).then(function (response) {
@@ -43,6 +45,7 @@ services.factory('Authentication', ['$http', function ($http) {
     createUser: function (email, password, twitter, phone) {
       return $http({
         method: "POST",
+        timeout:2000,
         url: serverBaseUrl + '/user',
         crossDomain: true,
         data: JSON.stringify({email: email, password: password, phoneNumber: phone, twitterHandle: twitter})
@@ -57,6 +60,7 @@ services.factory('Authentication', ['$http', function ($http) {
     updateUser: function (password, twitter, phone) {
       return $http({
         method: "PUT",
+        timout:2000,
         url: serverBaseUrl + '/user/' + currentUser.email,
         crossDomain: true,
         data: JSON.stringify({password: password, twitterHandle: twitter, phoneNumber: phone})
@@ -82,6 +86,7 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
         if (!result.error) {
           $http({
             method: "POST",
+            timeout:2000,
             url: serverBaseUrl + '/user/' + currentUser.email + '/subscription',
             crossDomain: true,
             data: JSON.stringify(feed)
@@ -107,6 +112,7 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
       var feedLinkUriEncoded = encodeURIComponent(feed.link);
       return $http({
         method: "DELETE",
+        tmieout:2000,
         url: serverBaseUrl + '/user/' + currentUser.email + '/subscription?feed=' + feedLinkUriEncoded,
         crossDomain: true
       }).then(function (response) {
@@ -125,6 +131,7 @@ services.factory('FeedManager', ['$q', '$http', function ($q, $http) {
     GetPopularFeeds: function () {
       return $http({
         method: "GET",
+        timeout:5000,
         url: serverBaseUrl + '/popular',
         crossDomain: true
       }).then(function (response) {
@@ -149,6 +156,7 @@ services.factory('KeyphraseManager', ['$q', '$http', function ($q, $http) {
     addKeyphrase: function (keyphrase) {
       return $http({
         method: "POST",
+        timeout:2000,
         url: serverBaseUrl + '/user/' + currentUser.email + '/subscription/keyphrase',
         crossDomain: true,
         data: JSON.stringify({feed: subscriptionBeingEdited.feed.link, keyphrase: keyphrase.keyphrase})
@@ -163,6 +171,7 @@ services.factory('KeyphraseManager', ['$q', '$http', function ($q, $http) {
     removeKeyphrase: function (keyphrase) {
       return $http({
         method: "DELETE",
+        timeout:2000,
         url: serverBaseUrl + '/user/' + currentUser.email + '/subscription/keyphrase/' + keyphrase.id,
         crossDomain: true
       }).then(function (response) {
@@ -176,6 +185,7 @@ services.factory('KeyphraseManager', ['$q', '$http', function ($q, $http) {
     editKeyphrase: function (newKeyphrase, oldKeyphrase) {
       return $http({
         method: "PUT",
+        timeout:2000,
         url: serverBaseUrl + '/user/' + currentUser.email + '/subscription/keyphrase/' + newKeyphrase.id,
         crossDomain: true,
         data: JSON.stringify({keyphrase: newKeyphrase.keyphrase})
