@@ -109,6 +109,7 @@
 
 /* #region Modals */
 .modal-body {
+    overflow-y: auto;
     word-break: normal;
     white-space: normal;
 }
