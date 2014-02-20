@@ -35,10 +35,10 @@
         <span ng-click="editKeyphrasesForFeed(subscription)" class="pointer glyphicon glyphicon-edit"></span>
       </td>
       <td class="text-center">
-        <span data-toggle="modal" data-target="#{{subscription.feed.title}}Modal" class="pointer glyphicon glyphicon-remove"></span>
+        <span data-toggle="modal" data-target="#modal-{{$index}}" class="pointer glyphicon glyphicon-remove"></span>
 
           <!-- Modal -->
-          <div class="modal fade" id="{{subscription.feed.title}}Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          <div class="modal fade" id="modal-{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                aria-hidden="true">
 
               <div class="modal-dialog">
