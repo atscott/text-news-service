@@ -106,3 +106,10 @@
     text-align: center;
 }
 /* #endregion Login and Create Account */
+
+/* #region Modals */
+.modal-body {
+    word-break: normal;
+    white-space: normal;
+}
+/* #endregion Modals */
